@@ -12,10 +12,9 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   String expressionString = '';
-  var parts;
-  var firstValue;
-  var secondValue;
   var result;
+  List<int> numbers = [];
+  List<String> operators = [];
 
   void _getExpression(String value) {
     setState(() {
@@ -24,27 +23,33 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void _evaluateExpression() {
-    for (int i = 0; i < expressionString.length; i++) {
-      if (expressionString[i] == '*') {
-        parts = expressionString.split('*');
-        firstValue = int.parse(parts[0].trim());
-        secondValue = int.parse(parts[1].trim());
-        result = firstValue * secondValue;
-      } else if (expressionString[i] == '/') {
-        parts = expressionString.split('/');
-        firstValue = int.parse(parts[0].trim());
-        secondValue = int.parse(parts[1].trim());
-        result = firstValue / secondValue;
-      } else if (expressionString[i] == '+') {
-        parts = expressionString.split('+');
-        firstValue = int.parse(parts[0].trim());
-        secondValue = int.parse(parts[1].trim());
-        result = firstValue + secondValue;
-      } else if (expressionString[i] == '-') {
-        parts = expressionString.split('-');
-        firstValue = int.parse(parts[0].trim());
-        secondValue = int.parse(parts[1].trim());
-        result = firstValue - secondValue;
+    numbers = expressionString
+        .split(RegExp(r'[+-/*]'))
+        .map((string) => int.parse(string.trim()))
+        .toList();
+    operators = expressionString
+        .split(RegExp(r'\d+(\.\d+)?'))
+        .where((string) => string.isNotEmpty)
+        .toList();
+
+    result = numbers[0];
+    for (int i = 0; i < numbers.length - 1; i++) {
+      switch (operators[i]) {
+        case '+':
+          result += numbers[i + 1];
+          break;
+
+        case '-':
+          result += numbers[i + 1];
+          break;
+
+        case '*':
+          result *= numbers[i + 1];
+          break;
+
+        case '/':
+          result /= numbers[i + 1];
+          break;
       }
     }
 
