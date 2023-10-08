@@ -59,10 +59,20 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void _eraseExpression() {
-    expressionString = '';
-    setState(() {
-      expressionString;
-    });
+    if (expressionString.isNotEmpty) {
+      setState(() {
+        expressionString = '';
+      });
+    }
+  }
+
+  void _removeLast() {
+    if (expressionString.isNotEmpty) {
+      setState(() {
+        expressionString =
+            expressionString.substring(0, expressionString.length - 1);
+      });
+    }
   }
 
   @override
@@ -85,11 +95,14 @@ class _CalculatorState extends State<Calculator> {
                         onPressed: () {
                           _eraseExpression();
                         },
-                        child: Text('C'),
+                        child:
+                            (expressionString.isEmpty) ? Text('C') : Text('AC'),
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: Text('label'),
+                        onPressed: () {
+                          _removeLast();
+                        },
+                        child: Text('\u232B'),
                       ),
                       TextButton(
                         onPressed: () {},
