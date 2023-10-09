@@ -24,7 +24,7 @@ class _CalculatorState extends State<Calculator> {
 
   void _evaluateExpression() {
     numbers = expressionString
-        .split(RegExp(r'[+-/*]'))
+        .split(RegExp(r'[+-/*%]'))
         .map((string) => int.parse(string.trim()))
         .toList();
     operators = expressionString
@@ -75,6 +75,19 @@ class _CalculatorState extends State<Calculator> {
     }
   }
 
+  void _calculatePercentage() {
+    if (expressionString.isNotEmpty) {
+      double expressionDivider = 1;
+      for (int i = 0; i < expressionString.length; i++) {
+        expressionDivider *= 10;
+      }
+      setState(() {
+        expressionString =
+            (double.parse(expressionString) / expressionDivider).toString();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,14 +118,16 @@ class _CalculatorState extends State<Calculator> {
                         child: Text('\u232B'),
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: Text('label'),
+                        onPressed: () {
+                          _calculatePercentage();
+                        },
+                        child: Text('%'),
                       ),
                       TextButton(
                         onPressed: () {
                           _getExpression('/');
                         },
-                        child: Text('/'),
+                        child: Text('\u00F7'),
                       ),
                     ],
                   ),
