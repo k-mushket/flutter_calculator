@@ -108,6 +108,9 @@ class _CalculatorState extends State<Calculator> {
                         onPressed: () {
                           _eraseExpression();
                         },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child:
                             (expressionString.isEmpty) ? Text('C') : Text('AC'),
                       ),
@@ -115,18 +118,27 @@ class _CalculatorState extends State<Calculator> {
                         onPressed: () {
                           _removeLast();
                         },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child: Text('\u232B'),
                       ),
                       TextButton(
                         onPressed: () {
                           _calculatePercentage();
                         },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child: Text('%'),
                       ),
                       TextButton(
                         onPressed: () {
                           _getExpression('/');
                         },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child: Text('\u00F7'),
                       ),
                     ],
@@ -147,6 +159,7 @@ class _CalculatorState extends State<Calculator> {
                         action: () {
                           _getExpression('*');
                         },
+                        color: Colors.orange,
                         text: Text('*'),
                       ),
                     ],
@@ -167,6 +180,7 @@ class _CalculatorState extends State<Calculator> {
                         action: () {
                           _getExpression('-');
                         },
+                        color: Colors.orange,
                         text: Text('-'),
                       ),
                     ],
@@ -187,6 +201,7 @@ class _CalculatorState extends State<Calculator> {
                         action: () {
                           _getExpression('+');
                         },
+                        color: Colors.orange,
                         text: Text('+'),
                       ),
                     ],
@@ -196,6 +211,9 @@ class _CalculatorState extends State<Calculator> {
                     children: [
                       TextButton(
                         onPressed: () {},
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child: Text('label'),
                       ),
                       TextButton(
@@ -210,6 +228,9 @@ class _CalculatorState extends State<Calculator> {
                         onPressed: () {
                           _evaluateExpression();
                         },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                        ),
                         child: Text('='),
                       ),
                     ],
