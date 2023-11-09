@@ -11,10 +11,11 @@ class CharacterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: action,
-        style: TextButton.styleFrom(
-          foregroundColor: color,
-        ),
-        child: text);
+      onPressed: action,
+      style: TextButton.styleFrom(
+        foregroundColor: color,
+      ),
+      child: text,
+    );
   }
 }
