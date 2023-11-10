@@ -6,7 +6,7 @@ class CharacterButton extends StatelessWidget {
 
   final Color? color;
   final void Function() action;
-  final Text text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,10 @@ class CharacterButton extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: color,
       ),
-      child: text,
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }
