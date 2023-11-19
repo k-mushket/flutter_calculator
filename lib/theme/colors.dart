@@ -5,3 +5,4 @@ const backgroundDark = Colors.black;
 
 const operationColor = Colors.orange;
 const numbersColor = Colors.black;
+const extendedColor = Colors.grey;

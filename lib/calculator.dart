@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/screens/additional_screen.dart';
 import 'package:flutter_calculator/screens/calculator_screen.dart';
+import 'package:flutter_calculator/screens/economic_screen.dart';
 
-class Calculator extends StatelessWidget {
+class Calculator extends StatefulWidget {
   const Calculator({super.key});
 
   @override
+  State<Calculator> createState() => _CalculatorState();
+}
+
+class _CalculatorState extends State<Calculator> {
+  final PageController _pageController = PageController();
+
+  void _navigateTo(int pageIndex) {
+    _pageController.animateToPage(
+      pageIndex,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: CalculatorScreen(),
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -22,15 +36,15 @@ class Calculator extends StatelessWidget {
                 icon: Icon(Icons.photo_size_select_large),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => _navigateTo(0),
                 icon: Icon(Icons.menu_open),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => _navigateTo(1),
                 icon: Icon(Icons.currency_exchange),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => _navigateTo(2),
                 icon: Icon(Icons.format_indent_decrease),
               ),
               IconButton(
@@ -40,7 +54,13 @@ class Calculator extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+        body: PageView(
+          controller: _pageController,
+          children: [
+            CalculatorScreen(),
+            EconomicScreen(),
+            AdditionalScreen(),
+          ],
+        ));
   }
 }

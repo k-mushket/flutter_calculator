@@ -11,21 +11,15 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(child: Text('asdg')),
-          ),
-          Divider(
-            indent: 20,
-            endIndent: 20,
-          ),
-          Expanded(
-            child: CalculatorKeypad(),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(child: Center(child: Text('asdg'))),
+        Divider(
+          indent: 20,
+          endIndent: 20,
+        ),
+        Expanded(child: CalculatorKeypad()),
+      ],
     );
   }
 }

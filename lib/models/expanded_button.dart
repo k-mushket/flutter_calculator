@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/theme/colors.dart';
 
-class CharacterButton extends StatelessWidget {
-  const CharacterButton(
+class ExtendedButton extends StatelessWidget {
+  const ExtendedButton(
       {super.key, this.color, required this.action, required this.text});
 
   final Color? color;
@@ -15,7 +15,7 @@ class CharacterButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: numbersColor,
+          foregroundColor: extendedColor,
         ),
         child: Text(
           text,

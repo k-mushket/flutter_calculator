@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/data/character_list.dart';
 import 'package:flutter_calculator/models/character_button.dart';
+import 'package:flutter_calculator/models/expanded_button.dart';
 
 class CalculatorKeypad extends StatefulWidget {
   const CalculatorKeypad({super.key});
@@ -9,7 +11,7 @@ class CalculatorKeypad extends StatefulWidget {
 }
 
 class _CalculatorKeypadState extends State<CalculatorKeypad> {
-  bool isExpanded = false;
+  bool isExpanded = true;
 
   void toggleKeyboard() {
     setState(() {
@@ -19,112 +21,37 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
 
   @override
   Widget build(BuildContext context) {
+    var numbers = CharacterList();
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (isExpanded) ...[
-          Column(
+          Row(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CharacterButton(action: () {}, text: '2nd'),
-                  CharacterButton(action: () {}, text: 'deg'),
-                  CharacterButton(action: () {}, text: 'sin'),
-                  CharacterButton(action: () {}, text: 'cos'),
-                  CharacterButton(action: () {}, text: 'tan'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CharacterButton(action: () {}, text: 'x\u02B8'),
-                  CharacterButton(action: () {}, text: 'lg'),
-                  CharacterButton(action: () {}, text: 'ln'),
-                  CharacterButton(action: () {}, text: '('),
-                  CharacterButton(action: () {}, text: ')'),
-                ],
-              ),
+              for (int j = 0; j < 5; j++)
+                ExtendedButton(action: () {}, text: '${numbers.expanded[j]}'),
+            ],
+          ),
+          Row(
+            children: [
+              for (int j = 5; j < 10; j++)
+                ExtendedButton(action: () {}, text: '${numbers.expanded[j]}'),
             ],
           ),
         ],
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (isExpanded) ...[
-              Column(
-                children: [
-                  CharacterButton(action: () {}, text: '\u221ax'),
-                  CharacterButton(action: () {}, text: 'x!'),
-                  CharacterButton(action: () {}, text: '\u0031\u2044\u2093'),
-                  CharacterButton(action: () {}, text: '\u03C0'),
-                  CharacterButton(action: () {}, text: '\u0065'),
-                ],
-              ),
-            ],
-            Column(
-              children: [
-                Row(
-                  children: [
-                    CharacterButton(action: () {}, text: '+'),
-                    CharacterButton(action: () {}, text: '+'),
-                    CharacterButton(action: () {}, text: '+'),
-                    CharacterButton(action: () {}, text: '+'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CharacterButton(action: () {}, text: '7'),
-                            CharacterButton(action: () {}, text: '8'),
-                            CharacterButton(action: () {}, text: '9'),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CharacterButton(action: () {}, text: '4'),
-                            CharacterButton(action: () {}, text: '5'),
-                            CharacterButton(action: () {}, text: '6'),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CharacterButton(action: () {}, text: '1'),
-                            CharacterButton(action: () {}, text: '2'),
-                            CharacterButton(action: () {}, text: '3'),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        CharacterButton(action: () {}, text: '*'),
-                        CharacterButton(action: () {}, text: '-'),
-                        CharacterButton(action: () {}, text: '+'),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CharacterButton(
-                        action: () => toggleKeyboard(), text: '\u21BB'),
-                    CharacterButton(action: () {}, text: '0'),
-                    CharacterButton(action: () {}, text: '.'),
-                    CharacterButton(action: () {}, text: '='),
-                  ],
-                ),
+        for (int i = 0; i < 4; i++)
+          Row(
+            children: [
+              if (isExpanded) ...[
+                ExtendedButton(action: () {}, text: '${numbers.expanded[0]}'),
               ],
-            ),
-          ],
-        )
+              for (int j = 0; j < 4; j++)
+                CharacterButton(action: () {}, text: '${numbers.numbers[j]}'),
+            ],
+          ),
       ],
     );
   }
 }
+
+// CharacterButton(action: () => toggleKeyboard(), text: '-'),
