@@ -1,11 +1,9 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_calculator/screens/additional_screen.dart';
 import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:flutter_calculator/screens/economic_screen.dart';
-
 
 class Calculator extends StatefulWidget with WidgetsBindingObserver {
   const Calculator({super.key});
@@ -37,19 +35,19 @@ class _CalculatorState extends State<Calculator> {
           children: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.picture_in_picture),
+              icon: FaIcon(FontAwesomeIcons.downLeftAndUpRightToCenter),
             ),
             IconButton(
               onPressed: () => _navigateTo(0),
-              icon: Icon(Icons.menu_open),
+              icon: Icon(FontAwesomeIcons.equals),
             ),
             IconButton(
               onPressed: () => _navigateTo(1),
-              icon: Icon(Icons.currency_exchange),
+              icon: Icon(FontAwesomeIcons.tableCells),
             ),
             IconButton(
               onPressed: () => _navigateTo(2),
-              icon: Icon(Icons.format_indent_decrease),
+              icon: Icon(FontAwesomeIcons.sackDollar),
             ),
             IconButton(
               onPressed: () {},
