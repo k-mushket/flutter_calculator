@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_calculator/models/character_button.dart';
-import 'package:flutter_calculator/components/calculator_screen/calculator_keypad.dart';
-
 class CharacterList {
+   
+
   final List<String> numbers = [
     'AC',
     '\u232B',
@@ -37,5 +35,10 @@ class CharacterList {
     'ln',
     '(',
     ')',
+    '\u221Ax',
+    'x!',
+    '\u0031\u2044\u2093',
+    '\u03C0',
+    '\uD83E',
   ];
 }

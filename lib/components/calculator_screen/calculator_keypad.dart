@@ -39,14 +39,20 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
           ),
         ],
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
           Row(
             children: [
               if (isExpanded) ...[
-                ExtendedButton(action: () {}, text: '${numbers.expanded[0]}'),
+                ExtendedButton(
+                  action: () {},
+                  text: '${numbers.expanded[i + 10]}',
+                ),
               ],
               for (int j = 0; j < 4; j++)
-                CharacterButton(action: () {}, text: '${numbers.numbers[j]}'),
+                CharacterButton(
+                  action: () {},
+                  text: '${numbers.numbers[4 * i + j]}',
+                ),
             ],
           ),
       ],
