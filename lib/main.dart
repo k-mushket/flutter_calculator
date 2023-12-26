@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_calculator/calculator.dart';
+import 'package:flutter_calculator/models/calculator_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Calculator(),
+    ChangeNotifierProvider(
+      create: (context) => CalculatorModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Calculator(),
+      ),
     ),
   );
 }

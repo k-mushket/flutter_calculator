@@ -1,6 +1,4 @@
 class CharacterList {
-   
-
   final List<String> numbers = [
     'AC',
     '\u232B',
