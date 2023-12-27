@@ -6,46 +6,28 @@ class CalculatorModel extends ChangeNotifier {
   List<num> numbers = [];
   List<String> operators = [];
 
+  String get input => _input;
+
   void setInput(String char) {
     if (char == '%' && _input == '0') {
-      return; 
+      return;
     } else if (_isLastCharacterOperator() && _isOperator(char)) {
       _input = _input.substring(0, _input.length - 1) + char;
-    } else if (char == '%') {
-      int i = _input.length - 1;
-      while (i >= 0 && '0123456789.'.contains(_input[i])) {
-        i--;
-      }
-      String percent = _input.substring(i + 1);
-      String result = _calculatePercentage(percent);
-      _input = _input.substring(0, i + 1) + result;
     } else {
-      if (_input == '0' && char != '.') {
-        _input = (char == '.' ? '0.' : char);
+      if (_input == '0') {
+        if (char == '.') {
+          _input = '0.';
+        } else if (_isOperator(char)) {
+          _input += char; // Додаємо оператор після '0', а не замінюємо ним '0'
+        } else {
+          _input = char; // Якщо введено число, замінюємо '0' на це число
+        }
       } else {
         _input += char;
       }
     }
 
     notifyListeners();
-  }
-
-  String _calculatePercentage(String percent) {
-    num number = num.parse(percent);
-    return (number / 100).toString();
-  }
-
-  bool _isLastCharacterOperator() {
-    if (_input.isEmpty) {
-      return false;
-    }
-
-    String char = _input[_input.length - 1];
-    return _isOperator(char);
-  }
-
-  bool _isOperator(String char) {
-    return ['/', '*', '+', '-'].contains(char);
   }
 
   void evaluateExpression() {
@@ -100,5 +82,21 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get input => _input;
+  String _calculatePercentage(String percent) {
+    num number = num.parse(percent);
+    return (number / 100).toString();
+  }
+
+  bool _isLastCharacterOperator() {
+    if (_input.isEmpty) {
+      return false;
+    }
+
+    String char = _input[_input.length - 1];
+    return _isOperator(char);
+  }
+
+  bool _isOperator(String char) {
+    return ['/', '*', '+', '-'].contains(char);
+  }
 }
