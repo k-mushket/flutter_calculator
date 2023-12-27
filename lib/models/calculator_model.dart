@@ -18,10 +18,12 @@ class CalculatorModel extends ChangeNotifier {
         if (char == '.') {
           _input = '0.';
         } else if (_isOperator(char)) {
-          _input += char; // Додаємо оператор після '0', а не замінюємо ним '0'
+          _input += char;
         } else {
-          _input = char; // Якщо введено число, замінюємо '0' на це число
+          _input = char;
         }
+      } else if (char == '.' && _isLastCharacterOperator()) {
+        _input += '0.';
       } else {
         _input += char;
       }
