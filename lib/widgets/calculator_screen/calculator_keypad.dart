@@ -78,7 +78,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[3]);
+                model.setInput('/');
               },
               text: '${numbers.numbers[3]}',
             ),
@@ -112,7 +112,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[7]);
+                model.setInput('*');
               },
               text: '${numbers.numbers[7]}',
             ),
