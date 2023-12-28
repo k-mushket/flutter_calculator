@@ -11,6 +11,8 @@ class CalculatorModel extends ChangeNotifier {
   void setInput(String char) {
     if (char == '%' && _input == '0') {
       return;
+    } else if (char == '%' && !_isLastCharacterOperator()) {
+      _calculatePercentage();
     } else if (_isLastCharacterOperator() && _isOperator(char)) {
       _input = _input.substring(0, _input.length - 1) + char;
     } else {
@@ -36,7 +38,7 @@ class CalculatorModel extends ChangeNotifier {
     numbers = [];
     operators = [];
 
-    RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%])');
+    RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()])');
     for (var match in regex.allMatches(_input)) {
       String token = match.group(0)!;
       if (_isOperator(token)) {
@@ -60,7 +62,11 @@ class CalculatorModel extends ChangeNotifier {
             result *= numbers[i + 1];
             break;
           case '/':
-            result /= numbers[i + 1];
+            if ((result / numbers[i + 1]).isNaN) {
+              result = "can't divide by zero";
+            } else {
+              result /= numbers[i + 1];
+            }
             break;
         }
       }
@@ -84,9 +90,15 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _calculatePercentage(String percent) {
+  void _calculatePercentage() {
+    int i = _input.length - 1;
+    while (i >= 0 && '0123456789.'.contains(_input[i])) {
+      i--;
+    }
+    String percent = _input.substring(i + 1);
     num number = num.parse(percent);
-    return (number / 100).toString();
+    String result = (number / 100).toString();
+    _input = _input.substring(0, i + 1) + result;
   }
 
   bool _isLastCharacterOperator() {
@@ -99,6 +111,6 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   bool _isOperator(String char) {
-    return ['/', '*', '+', '-'].contains(char);
+    return ['/', '*', '+', '-', '(', ')'].contains(char);
   }
 }
