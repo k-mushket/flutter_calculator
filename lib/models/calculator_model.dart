@@ -8,13 +8,19 @@ class CalculatorModel extends ChangeNotifier {
 
   String get input => _input;
 
-  void setInput(String char) {
+  void inputVerification(String char) {
     if (char == '%' && _input == '0') {
       return;
     } else if (char == '%' && !_isLastCharacterOperator()) {
       _calculatePercentage();
     } else if (_isLastCharacterOperator() && _isOperator(char)) {
       _input = _input.substring(0, _input.length - 1) + char;
+    } else if (char == '(' || char == ')') {
+      if (_input == '0') {
+        _input = char;
+      } else {
+        _input += char;
+      }
     } else {
       if (_input == '0') {
         if (char == '.') {
@@ -35,45 +41,50 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void evaluateExpression() {
-    numbers = [];
-    operators = [];
+    try {
+      numbers = [];
+      operators = [];
 
-    RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()])');
-    for (var match in regex.allMatches(_input)) {
-      String token = match.group(0)!;
-      if (_isOperator(token)) {
-        operators.add(token);
-      } else {
-        numbers.add(num.parse(token));
-      }
-    }
-
-    if (numbers.isNotEmpty) {
-      result = numbers[0];
-      for (int i = 0; i < operators.length; i++) {
-        switch (operators[i]) {
-          case '+':
-            result += numbers[i + 1];
-            break;
-          case '-':
-            result -= numbers[i + 1];
-            break;
-          case '*':
-            result *= numbers[i + 1];
-            break;
-          case '/':
-            if ((result / numbers[i + 1]).isNaN) {
-              result = "can't divide by zero";
-            } else {
-              result /= numbers[i + 1];
-            }
-            break;
+      RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()])');
+      for (var match in regex.allMatches(_input)) {
+        String token = match.group(0)!;
+        if (_isOperator(token)) {
+          operators.add(token);
+        } else {
+          numbers.add(num.parse(token));
         }
       }
-    }
 
-    _input = result.toString();
-    notifyListeners();
+      if (numbers.isNotEmpty) {
+        result = numbers[0];
+        for (int i = 0; i < operators.length; i++) {
+          switch (operators[i]) {
+            case '+':
+              result += numbers[i + 1];
+              break;
+            case '-':
+              result -= numbers[i + 1];
+              break;
+            case '*':
+              result *= numbers[i + 1];
+              break;
+            case '/':
+              if ((result / numbers[i + 1]).isNaN) {
+                result = "can't divide by zero";
+              } else {
+                result /= numbers[i + 1];
+              }
+              break;
+          }
+        }
+      }
+
+      _input = result.toString();
+      notifyListeners();
+    } catch (e) {
+      _input = '$e';
+      notifyListeners();
+    }
   }
 
   void eraseExpression() {
@@ -96,9 +107,13 @@ class CalculatorModel extends ChangeNotifier {
       i--;
     }
     String percent = _input.substring(i + 1);
-    num number = num.parse(percent);
-    String result = (number / 100).toString();
-    _input = _input.substring(0, i + 1) + result;
+    try {
+      num number = num.parse(percent);
+      String result = (number / 100).toString();
+      _input = _input.substring(0, i + 1) + result;
+    } catch (e) {
+      _input = '$e';
+    }
   }
 
   bool _isLastCharacterOperator() {
@@ -111,6 +126,6 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   bool _isOperator(String char) {
-    return ['/', '*', '+', '-', '(', ')'].contains(char);
+    return ['/', '*', '+', '-'].contains(char);
   }
 }
