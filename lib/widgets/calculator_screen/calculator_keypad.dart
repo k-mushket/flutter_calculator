@@ -45,8 +45,12 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               ExtendedButton(action: () {}, text: '${numbers.expanded[5]}'),
               ExtendedButton(action: () {}, text: '${numbers.expanded[6]}'),
               ExtendedButton(action: () {}, text: '${numbers.expanded[7]}'),
-              ExtendedButton(action: () {}, text: '${numbers.expanded[8]}'),
-              ExtendedButton(action: () {}, text: '${numbers.expanded[9]}'),
+              ExtendedButton(
+                  action: () => model.inputVerification('('),
+                  text: '${numbers.expanded[8]}'),
+              ExtendedButton(
+                  action: () => model.inputVerification(')'),
+                  text: '${numbers.expanded[9]}'),
             ],
           ),
         ],
@@ -72,13 +76,13 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[2]);
+                model.inputVerification(numbers.numbers[2]);
               },
               text: '${numbers.numbers[2]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput('/');
+                model.inputVerification('/');
               },
               text: '${numbers.numbers[3]}',
             ),
@@ -94,25 +98,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[4]);
+                model.inputVerification(numbers.numbers[4]);
               },
               text: '${numbers.numbers[4]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[5]);
+                model.inputVerification(numbers.numbers[5]);
               },
               text: '${numbers.numbers[5]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[6]);
+                model.inputVerification(numbers.numbers[6]);
               },
               text: '${numbers.numbers[6]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput('*');
+                model.inputVerification('*');
               },
               text: '${numbers.numbers[7]}',
             ),
@@ -128,25 +132,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[8]);
+                model.inputVerification(numbers.numbers[8]);
               },
               text: '${numbers.numbers[8]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[9]);
+                model.inputVerification(numbers.numbers[9]);
               },
               text: '${numbers.numbers[9]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[10]);
+                model.inputVerification(numbers.numbers[10]);
               },
               text: '${numbers.numbers[10]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[11]);
+                model.inputVerification(numbers.numbers[11]);
               },
               text: '${numbers.numbers[11]}',
             ),
@@ -162,25 +166,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[12]);
+                model.inputVerification(numbers.numbers[12]);
               },
               text: '${numbers.numbers[12]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[13]);
+                model.inputVerification(numbers.numbers[13]);
               },
               text: '${numbers.numbers[13]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[14]);
+                model.inputVerification(numbers.numbers[14]);
               },
               text: '${numbers.numbers[14]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[15]);
+                model.inputVerification(numbers.numbers[15]);
               },
               text: '${numbers.numbers[15]}',
             ),
@@ -191,24 +195,24 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             if (isExpanded) ...[
               ExtendedButton(
                 action: () {},
-                text: '${numbers.expanded[12]}',
+                text: '${numbers.expanded[14]}',
               ),
             ],
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[16]);
+                model.inputVerification(numbers.numbers[16]);
               },
               text: '${numbers.numbers[16]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[17]);
+                model.inputVerification(numbers.numbers[17]);
               },
               text: '${numbers.numbers[17]}',
             ),
             CharacterButton(
               action: () {
-                model.setInput(numbers.numbers[18]);
+                model.inputVerification(numbers.numbers[18]);
               },
               text: '${numbers.numbers[18]}',
             ),
