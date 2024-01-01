@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'dart:math';
 
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
@@ -45,7 +46,7 @@ class CalculatorModel extends ChangeNotifier {
       numbers = [];
       operators = [];
 
-      RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()])');
+      RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()√])');
       for (var match in regex.allMatches(_input)) {
         String token = match.group(0)!;
         if (_isOperator(token)) {
@@ -74,6 +75,9 @@ class CalculatorModel extends ChangeNotifier {
               } else {
                 result /= numbers[i + 1];
               }
+              break;
+            case '√':
+              result = sqrt(numbers[i]);
               break;
           }
         }
