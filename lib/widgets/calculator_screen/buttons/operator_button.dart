@@ -10,7 +10,7 @@ class OperatorButton extends StatelessWidget {
   });
 
   final Color? color;
-  final void Function() action;
+  final VoidCallback action;
   final String text;
 
   @override
@@ -24,8 +24,7 @@ class OperatorButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
       ),

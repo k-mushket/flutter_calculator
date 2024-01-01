@@ -3,13 +3,17 @@ import 'dart:math';
 
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
-  var result;
+  String _commonResult = '0';
+  var temp;
+  double? inputTextSize = 52;
+  double? previewRTextSize = 26;
   List<num> numbers = [];
   List<String> operators = [];
 
   String get input => _input;
+  String get previewResult => _commonResult;
 
-  void inputVerification(String char) {
+  void checkInput(String char) {
     if (char == '%' && _input == '0') {
       return;
     } else if (char == '%' && !_isLastCharacterOperator()) {
@@ -37,14 +41,14 @@ class CalculatorModel extends ChangeNotifier {
         _input += char;
       }
     }
-
+    _previewExpression();
     notifyListeners();
   }
 
-  void evaluateExpression() {
+  void _previewExpression() {
     try {
-      numbers = [];
-      operators = [];
+      numbers.clear();
+      operators.clear();
 
       RegExp regex = RegExp(r'(\d+\.?\d*)|([+-/*%()√])');
       for (var match in regex.allMatches(_input)) {
@@ -56,48 +60,60 @@ class CalculatorModel extends ChangeNotifier {
         }
       }
 
-      if (numbers.isNotEmpty) {
-        result = numbers[0];
+      if (numbers.isNotEmpty && numbers.length != operators.length) {
+        temp = numbers[0];
         for (int i = 0; i < operators.length; i++) {
           switch (operators[i]) {
             case '+':
-              result += numbers[i + 1];
+              temp += numbers[i + 1];
               break;
             case '-':
-              result -= numbers[i + 1];
+              temp -= numbers[i + 1];
               break;
             case '*':
-              result *= numbers[i + 1];
+              temp *= numbers[i + 1];
               break;
             case '/':
-              if ((result / numbers[i + 1]).isNaN) {
-                result = "can't divide by zero";
+              var exp = temp / numbers[i + 1];
+              if (exp.isNaN) {
+                temp = "can't divide by zero";
               } else {
-                result /= numbers[i + 1];
+                temp = exp % 1 == 0 ? exp.toInt() : exp;
               }
               break;
             case '√':
-              result = sqrt(numbers[i]);
+              temp = sqrt(numbers[i]);
               break;
           }
         }
       }
 
-      _input = result.toString();
+      _commonResult = temp.toString();
       notifyListeners();
     } catch (e) {
-      _input = '$e';
+      _commonResult = '$e';
       notifyListeners();
     }
   }
 
+  void evaluateExpression() {
+    inputTextSize = 26;
+    previewRTextSize = 52;
+    _commonResult;
+    notifyListeners();
+  }
+
   void eraseExpression() {
     _input = '0';
+    inputTextSize = 52;
+    previewRTextSize = 26;
     notifyListeners();
   }
 
   void removeLast() {
     if (_input.length == 1) {
+      inputTextSize = 52;
+      previewRTextSize = 26;
       _input = '0';
     } else if (_input.isNotEmpty) {
       _input = _input.substring(0, _input.length - 1);

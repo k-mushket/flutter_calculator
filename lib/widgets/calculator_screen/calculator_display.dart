@@ -10,7 +10,19 @@ class CalculatorDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CalculatorModel>(
       builder: (context, model, child) {
-        return Text(model.input);
+        return Column(
+          children: [
+            Text(
+              model.input,
+              style: TextStyle(fontSize: model.inputTextSize),
+            ),
+            if (model.input != '0')
+              Text(
+                '=${model.previewResult}',
+                style: TextStyle(fontSize: model.previewRTextSize),
+              ),
+          ],
+        );
       },
     );
   }

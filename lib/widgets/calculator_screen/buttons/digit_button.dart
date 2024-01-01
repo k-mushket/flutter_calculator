@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/theme/colors.dart';
 
-class ExtendedButton extends StatelessWidget {
-  const ExtendedButton(
+class DigitButton extends StatelessWidget {
+  const DigitButton(
       {super.key, this.color, required this.action, required this.text});
 
   final Color? color;
@@ -15,13 +15,12 @@ class ExtendedButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: extendedColor,
+          foregroundColor: numbersColor,
         ),
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
         ),
       ),
