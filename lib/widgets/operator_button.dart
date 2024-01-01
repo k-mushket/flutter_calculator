@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/theme/colors.dart';
 
-class CharacterButton extends StatelessWidget {
-  const CharacterButton(
-      {super.key, this.color, required this.action, required this.text});
+class OperatorButton extends StatelessWidget {
+  const OperatorButton({
+    super.key,
+    this.color,
+    required this.action,
+    required this.text,
+  });
 
   final Color? color;
   final void Function() action;
@@ -15,11 +19,14 @@ class CharacterButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: numbersColor,
+          foregroundColor: operationColor,
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

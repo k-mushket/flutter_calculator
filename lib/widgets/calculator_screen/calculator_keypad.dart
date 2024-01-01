@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/animation.dart';
 
 import 'package:flutter_calculator/data/character_list.dart';
 import 'package:flutter_calculator/models/calculator_model.dart';
-import 'package:flutter_calculator/models/character_button.dart';
-import 'package:flutter_calculator/models/expanded_button.dart';
+import 'package:flutter_calculator/widgets/digit_button.dart';
+import 'package:flutter_calculator/widgets/operator_button.dart';
+import 'package:flutter_calculator/widgets/expanded_button.dart';
 
 class CalculatorKeypad extends StatefulWidget {
   const CalculatorKeypad({super.key});
@@ -58,29 +60,29 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
           children: [
             if (isExpanded) ...[
               ExtendedButton(
-                action: () {},
+                action: () => model.inputVerification('√'),
                 text: '${numbers.expanded[10]}',
               ),
             ],
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.eraseExpression();
               },
-              text: '${numbers.numbers[0]}',
+              text: model.input == '0' ? '${numbers.numbers[0]}' : 'C',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.removeLast();
               },
               text: '${numbers.numbers[1]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.inputVerification(numbers.numbers[2]);
               },
               text: '${numbers.numbers[2]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.inputVerification('/');
               },
@@ -96,25 +98,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
                 text: '${numbers.expanded[11]}',
               ),
             ],
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[4]);
               },
               text: '${numbers.numbers[4]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[5]);
               },
               text: '${numbers.numbers[5]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[6]);
               },
               text: '${numbers.numbers[6]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.inputVerification('*');
               },
@@ -130,25 +132,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
                 text: '${numbers.expanded[12]}',
               ),
             ],
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[8]);
               },
               text: '${numbers.numbers[8]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[9]);
               },
               text: '${numbers.numbers[9]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[10]);
               },
               text: '${numbers.numbers[10]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.inputVerification(numbers.numbers[11]);
               },
@@ -164,25 +166,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
                 text: '${numbers.expanded[13]}',
               ),
             ],
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[12]);
               },
               text: '${numbers.numbers[12]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[13]);
               },
               text: '${numbers.numbers[13]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[14]);
               },
               text: '${numbers.numbers[14]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.inputVerification(numbers.numbers[15]);
               },
@@ -193,33 +195,38 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
         Row(
           children: [
             if (isExpanded) ...[
-              ExtendedButton(
+              OperatorButton(
+                action: () => toggleKeyboard(),
+                text: '${numbers.numbers[16]}',
+              ),
+              DigitButton(
                 action: () {},
-                text: '${numbers.expanded[14]}',
+                text: 'e',
               ),
             ],
-            CharacterButton(
-              action: () {
-                model.inputVerification(numbers.numbers[16]);
-              },
-              text: '${numbers.numbers[16]}',
-            ),
-            CharacterButton(
+            if (!isExpanded) ...[
+              OperatorButton(
+                action: () => toggleKeyboard(),
+                text: '${numbers.numbers[16]}',
+              ),
+            ],
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[17]);
               },
               text: '${numbers.numbers[17]}',
             ),
-            CharacterButton(
+            DigitButton(
               action: () {
                 model.inputVerification(numbers.numbers[18]);
               },
               text: '${numbers.numbers[18]}',
             ),
-            CharacterButton(
+            OperatorButton(
               action: () {
                 model.evaluateExpression();
               },
+              color: Colors.orange,
               text: '${numbers.numbers[19]}',
             ),
           ],
@@ -228,5 +235,3 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
     );
   }
 }
-
-// CharacterButton(action: () => toggleKeyboard(), text: '-'),
