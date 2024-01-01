@@ -74,10 +74,11 @@ class CalculatorModel extends ChangeNotifier {
               temp *= numbers[i + 1];
               break;
             case '/':
-              if ((temp / numbers[i + 1]).isNaN) {
+              var exp = temp / numbers[i + 1];
+              if (exp.isNaN) {
                 temp = "can't divide by zero";
               } else {
-                temp /= numbers[i + 1];
+                temp = exp % 1 == 0 ? exp.toInt() : exp;
               }
               break;
             case '√':
