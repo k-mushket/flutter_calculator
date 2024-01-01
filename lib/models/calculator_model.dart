@@ -3,11 +3,20 @@ import 'dart:math';
 
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
-  var result;
+  String _previewResult = '0';
+  var temp;
+  double? inputTextSize = 52;
+  double? previewRTextSize = 26;
   List<num> numbers = [];
   List<String> operators = [];
 
   String get input => _input;
+  String get previewResult => _previewResult;
+
+  void changeSize() {
+    inputTextSize = 26;
+    previewRTextSize = 52;
+  }
 
   void inputVerification(String char) {
     if (char == '%' && _input == '0') {
@@ -57,42 +66,44 @@ class CalculatorModel extends ChangeNotifier {
       }
 
       if (numbers.isNotEmpty) {
-        result = numbers[0];
+        temp = numbers[0];
         for (int i = 0; i < operators.length; i++) {
           switch (operators[i]) {
             case '+':
-              result += numbers[i + 1];
+              temp += numbers[i + 1];
               break;
             case '-':
-              result -= numbers[i + 1];
+              temp -= numbers[i + 1];
               break;
             case '*':
-              result *= numbers[i + 1];
+              temp *= numbers[i + 1];
               break;
             case '/':
-              if ((result / numbers[i + 1]).isNaN) {
-                result = "can't divide by zero";
+              if ((temp / numbers[i + 1]).isNaN) {
+                temp = "can't divide by zero";
               } else {
-                result /= numbers[i + 1];
+                temp /= numbers[i + 1];
               }
               break;
             case '√':
-              result = sqrt(numbers[i]);
+              temp = sqrt(numbers[i]);
               break;
           }
         }
       }
 
-      _input = result.toString();
+      _previewResult = temp.toString();
       notifyListeners();
     } catch (e) {
-      _input = '$e';
+      _previewResult = '$e';
       notifyListeners();
     }
   }
 
   void eraseExpression() {
     _input = '0';
+    inputTextSize = 52;
+    previewRTextSize = 26;
     notifyListeners();
   }
 

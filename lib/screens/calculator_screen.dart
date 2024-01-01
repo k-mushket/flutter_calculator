@@ -14,7 +14,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: Center(child: CalculatorDisplay())),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.all(20),
+                alignment: Alignment.bottomRight,
+                child: CalculatorDisplay(),
+              ),
+            ],
+          ),
+        ),
         Divider(
           indent: 20,
           endIndent: 20,

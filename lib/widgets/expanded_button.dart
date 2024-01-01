@@ -20,8 +20,7 @@ class ExtendedButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 24,
           ),
         ),
       ),

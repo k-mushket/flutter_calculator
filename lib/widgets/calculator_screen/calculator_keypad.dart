@@ -68,7 +68,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               action: () {
                 model.eraseExpression();
               },
-              text: model.input == '0' ? '${numbers.numbers[0]}' : 'C',
+              text: '${numbers.numbers[0]}',
             ),
             OperatorButton(
               action: () {
@@ -225,6 +225,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             OperatorButton(
               action: () {
                 model.evaluateExpression();
+                model.changeSize();
               },
               color: Colors.orange,
               text: '${numbers.numbers[19]}',
