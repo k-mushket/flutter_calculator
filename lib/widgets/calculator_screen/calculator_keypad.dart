@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/animation.dart';
 
 import 'package:flutter_calculator/data/character_list.dart';
 import 'package:flutter_calculator/models/calculator_model.dart';
-import 'package:flutter_calculator/widgets/digit_button.dart';
-import 'package:flutter_calculator/widgets/operator_button.dart';
-import 'package:flutter_calculator/widgets/expanded_button.dart';
+import 'package:flutter_calculator/widgets/calculator_screen/buttons/digit_button.dart';
+import 'package:flutter_calculator/widgets/calculator_screen/buttons/operator_button.dart';
+import 'package:flutter_calculator/widgets/calculator_screen/buttons/expanded_button.dart';
 
 class CalculatorKeypad extends StatefulWidget {
   const CalculatorKeypad({super.key});
@@ -48,10 +47,10 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               ExtendedButton(action: () {}, text: '${numbers.expanded[6]}'),
               ExtendedButton(action: () {}, text: '${numbers.expanded[7]}'),
               ExtendedButton(
-                  action: () => model.inputVerification('('),
+                  action: () => model.checkInput('('),
                   text: '${numbers.expanded[8]}'),
               ExtendedButton(
-                  action: () => model.inputVerification(')'),
+                  action: () => model.checkInput(')'),
                   text: '${numbers.expanded[9]}'),
             ],
           ),
@@ -60,7 +59,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
           children: [
             if (isExpanded) ...[
               ExtendedButton(
-                action: () => model.inputVerification('√'),
+                action: () => model.checkInput('√'),
                 text: '${numbers.expanded[10]}',
               ),
             ],
@@ -78,13 +77,13 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ),
             OperatorButton(
               action: () {
-                model.inputVerification(numbers.numbers[2]);
+                model.checkInput(numbers.numbers[2]);
               },
               text: '${numbers.numbers[2]}',
             ),
             OperatorButton(
               action: () {
-                model.inputVerification('/');
+                model.checkInput('/');
               },
               text: '${numbers.numbers[3]}',
             ),
@@ -100,25 +99,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[4]);
+                model.checkInput(numbers.numbers[4]);
               },
               text: '${numbers.numbers[4]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[5]);
+                model.checkInput(numbers.numbers[5]);
               },
               text: '${numbers.numbers[5]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[6]);
+                model.checkInput(numbers.numbers[6]);
               },
               text: '${numbers.numbers[6]}',
             ),
             OperatorButton(
               action: () {
-                model.inputVerification('*');
+                model.checkInput('*');
               },
               text: '${numbers.numbers[7]}',
             ),
@@ -134,25 +133,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[8]);
+                model.checkInput(numbers.numbers[8]);
               },
               text: '${numbers.numbers[8]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[9]);
+                model.checkInput(numbers.numbers[9]);
               },
               text: '${numbers.numbers[9]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[10]);
+                model.checkInput(numbers.numbers[10]);
               },
               text: '${numbers.numbers[10]}',
             ),
             OperatorButton(
               action: () {
-                model.inputVerification(numbers.numbers[11]);
+                model.checkInput(numbers.numbers[11]);
               },
               text: '${numbers.numbers[11]}',
             ),
@@ -168,25 +167,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[12]);
+                model.checkInput(numbers.numbers[12]);
               },
               text: '${numbers.numbers[12]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[13]);
+                model.checkInput(numbers.numbers[13]);
               },
               text: '${numbers.numbers[13]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[14]);
+                model.checkInput(numbers.numbers[14]);
               },
               text: '${numbers.numbers[14]}',
             ),
             OperatorButton(
               action: () {
-                model.inputVerification(numbers.numbers[15]);
+                model.checkInput(numbers.numbers[15]);
               },
               text: '${numbers.numbers[15]}',
             ),
@@ -194,38 +193,31 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
         ),
         Row(
           children: [
+            OperatorButton(
+              action: () => toggleKeyboard(),
+              text: '${numbers.numbers[16]}',
+            ),
             if (isExpanded) ...[
-              OperatorButton(
-                action: () => toggleKeyboard(),
-                text: '${numbers.numbers[16]}',
-              ),
               DigitButton(
                 action: () {},
                 text: 'e',
               ),
             ],
-            if (!isExpanded) ...[
-              OperatorButton(
-                action: () => toggleKeyboard(),
-                text: '${numbers.numbers[16]}',
-              ),
-            ],
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[17]);
+                model.checkInput(numbers.numbers[17]);
               },
               text: '${numbers.numbers[17]}',
             ),
             DigitButton(
               action: () {
-                model.inputVerification(numbers.numbers[18]);
+                model.checkInput(numbers.numbers[18]);
               },
               text: '${numbers.numbers[18]}',
             ),
             OperatorButton(
               action: () {
                 model.evaluateExpression();
-                model.changeSize();
               },
               color: Colors.orange,
               text: '${numbers.numbers[19]}',
