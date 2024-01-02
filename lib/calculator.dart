@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:flutter_calculator/screens/history_screen.dart';
 import 'package:flutter_calculator/screens/additional_screen.dart';
 import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:flutter_calculator/screens/economic_screen.dart';
@@ -14,6 +15,29 @@ class Calculator extends StatefulWidget with WidgetsBindingObserver {
 
 class _CalculatorState extends State<Calculator> {
   final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(_pageChanged);
+  }
+
+  @override
+  void dispose() {
+    _pageController.removeListener(_pageChanged);
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _pageChanged() {
+    int? currentPage = _pageController.page?.round();
+    if (currentPage != null && currentPage != _currentPage) {
+      setState(() {
+        _currentPage = currentPage;
+      });
+    }
+  }
 
   void _navigateTo(int pageIndex) {
     _pageController.animateToPage(
@@ -39,18 +63,34 @@ class _CalculatorState extends State<Calculator> {
             ),
             IconButton(
               onPressed: () => _navigateTo(0),
-              icon: Icon(FontAwesomeIcons.equals),
+              icon: Icon(
+                FontAwesomeIcons.equals,
+                color: _currentPage == 0 ? Colors.orange : Colors.black,
+              ),
             ),
             IconButton(
               onPressed: () => _navigateTo(1),
-              icon: Icon(FontAwesomeIcons.tableCells),
+              icon: Icon(
+                FontAwesomeIcons.tableCells,
+                color: _currentPage == 1 ? Colors.orange : Colors.black,
+              ),
             ),
             IconButton(
               onPressed: () => _navigateTo(2),
-              icon: Icon(FontAwesomeIcons.sackDollar),
+              icon: Icon(
+                FontAwesomeIcons.sackDollar,
+                color: _currentPage == 2 ? Colors.orange : Colors.black,
+              ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoryScreen(),
+                  ),
+                );
+              },
               icon: Icon(Icons.more_vert),
             ),
           ],
