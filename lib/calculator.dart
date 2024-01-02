@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:flutter_calculator/screens/history_screen.dart';
 import 'package:flutter_calculator/screens/additional_screen.dart';
 import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:flutter_calculator/screens/economic_screen.dart';
@@ -22,6 +23,13 @@ class _CalculatorState extends State<Calculator> {
     _pageController.addListener(_pageChanged);
   }
 
+  @override
+  void dispose() {
+    _pageController.removeListener(_pageChanged);
+    _pageController.dispose();
+    super.dispose();
+  }
+
   void _pageChanged() {
     int? currentPage = _pageController.page?.round();
     if (currentPage != null && currentPage != _currentPage) {
@@ -29,13 +37,6 @@ class _CalculatorState extends State<Calculator> {
         _currentPage = currentPage;
       });
     }
-  }
-
-  @override
-  void dispose() {
-    _pageController.removeListener(_pageChanged);
-    _pageController.dispose();
-    super.dispose();
   }
 
   void _navigateTo(int pageIndex) {
@@ -82,7 +83,14 @@ class _CalculatorState extends State<Calculator> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoryScreen(),
+                  ),
+                );
+              },
               icon: Icon(Icons.more_vert),
             ),
           ],

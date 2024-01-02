@@ -13,6 +13,11 @@ class CalculatorModel extends ChangeNotifier {
   String get input => _input;
   String get previewResult => _commonResult;
 
+  void changeSize() {
+    previewRTextSize = 52;
+    inputTextSize = 26;
+  }
+
   void checkInput(String char) {
     if (char == '%' && _input == '0') {
       return;
@@ -97,9 +102,8 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void evaluateExpression() {
-    inputTextSize = 26;
-    previewRTextSize = 52;
     _commonResult;
+    changeSize();
     notifyListeners();
   }
 
