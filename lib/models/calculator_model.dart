@@ -22,7 +22,7 @@ class CalculatorModel extends ChangeNotifier {
     if (char == '%' && _input == '0') {
       return;
     } else if (char == '%' && !_isLastCharacterOperator()) {
-      _calculatePercentage();
+      calculatePercentage();
     } else if (_isLastCharacterOperator() && _isOperator(char)) {
       _input = _input.substring(0, _input.length - 1) + char;
     } else if (char == '(' || char == ')') {
@@ -114,7 +114,7 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeLast() {
+  void removeLastChar() {
     if (_input.length == 1) {
       inputTextSize = 52;
       previewRTextSize = 26;
@@ -125,7 +125,7 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _calculatePercentage() {
+  void calculatePercentage() {
     int i = _input.length - 1;
     while (i >= 0 && '0123456789.'.contains(_input[i])) {
       i--;

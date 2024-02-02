@@ -71,7 +71,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ),
             OperatorButton(
               action: () {
-                model.removeLast();
+                model.removeLastChar();
               },
               text: '${numbers.numbers[1]}',
             ),

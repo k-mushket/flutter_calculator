@@ -11,6 +11,7 @@ class CalculatorDisplay extends StatelessWidget {
     return Consumer<CalculatorModel>(
       builder: (context, model, child) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
               model.input,
