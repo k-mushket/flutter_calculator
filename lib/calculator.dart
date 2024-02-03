@@ -82,16 +82,30 @@ class _CalculatorState extends State<Calculator> {
                 color: _currentPage == 2 ? Colors.orange : Colors.black,
               ),
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HistoryScreen(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.more_vert),
+            // IconButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => HistoryScreen(),
+            //       ),
+            //     );
+            //   },
+            //   icon: Icon(Icons.more_vert),
+            // ),
+            PopupMenuButton(
+              onSelected: (value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HistoryScreen(),
+                ),
+              ),
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'History',
+                  child: Text('History'),
+                ),
+              ],
             ),
           ],
         ),
