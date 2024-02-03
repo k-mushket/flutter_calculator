@@ -21,9 +21,11 @@ class CalculatorModel extends ChangeNotifier {
   void checkInput(String char) {
     if (char == '%' && _input == '0' ||
         (_input.endsWith('.') && char == '.') ||
-        char == '.' && _input.split(RegExp(r'[\+\-\*\/]')).last.contains('.')) {
+        (char == '.' &&
+            _input.split(RegExp(r'[\+\-\*\/]')).last.contains('.')) ||
+        (char == '%' && _isLastCharacterOperator())) {
       return;
-    } else if (char == '%' && !_isLastCharacterOperator()) {
+    } else if (char == '%') {
       calculatePercentage();
     } else if (_isLastCharacterOperator() && _isOperator(char)) {
       _input = _input.substring(0, _input.length - 1) + char;
@@ -49,7 +51,6 @@ class CalculatorModel extends ChangeNotifier {
       }
     }
     _previewExpression();
-    notifyListeners();
   }
 
   void _previewExpression() {
