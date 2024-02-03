@@ -19,7 +19,7 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void checkInput(String char) {
-    if (char == '%' && _input == '0') {
+    if (char == '%' && _input == '0' || (_input.endsWith('.') && char == '.')) {
       return;
     } else if (char == '%' && !_isLastCharacterOperator()) {
       calculatePercentage();
@@ -150,6 +150,6 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   bool _isOperator(String char) {
-    return ['/', '*', '+', '-'].contains(char);
+    return ['/', '*', '+', '-', '(', ')'].contains(char);
   }
 }

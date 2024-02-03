@@ -15,7 +15,7 @@ class CalculatorKeypad extends StatefulWidget {
 }
 
 class _CalculatorKeypadState extends State<CalculatorKeypad> {
-  bool isExpanded = true;
+  bool isExpanded = false;
 
   void toggleKeyboard() {
     setState(() {
