@@ -10,7 +10,7 @@ class AdditionalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: const AlwaysScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
@@ -39,7 +39,7 @@ class AdditionalScreen extends StatelessWidget {
                 ),
                 Text(
                   item.description,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 )
               ],
             ),
@@ -52,12 +52,12 @@ class AdditionalScreen extends StatelessWidget {
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    iconTheme: IconThemeData(
+                    iconTheme: const IconThemeData(
                       color: Colors.black,
                     ),
                     title: Text(
                       item.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                       ),
                     ),

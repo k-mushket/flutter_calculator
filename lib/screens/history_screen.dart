@@ -13,10 +13,10 @@ class HistoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black,
         ),
-        title: Text(
+        title: const Text(
           'History',
           style: TextStyle(
             color: Colors.black,
@@ -28,7 +28,7 @@ class HistoryScreen extends StatelessWidget {
               Navigator.of(context).pop();
               model.removeHistory();
             },
-            icon: Icon(Icons.delete_outline),
+            icon: const Icon(Icons.delete_outline),
           ),
         ],
         centerTitle: true,
@@ -44,7 +44,7 @@ class HistoryScreen extends StatelessWidget {
                   (e) => Text(
                     e,
                     textAlign: TextAlign.end,
-                    style: TextStyle(fontSize: 26),
+                    style: const TextStyle(fontSize: 26),
                   ),
                 ),
               ],

@@ -4,12 +4,12 @@ import 'package:flutter_calculator/models/item.dart';
 import 'package:flutter_calculator/data/economic_screen_list.dart';
 
 class EconomicScreen extends StatelessWidget {
-  EconomicScreen({super.key});
+  const EconomicScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
@@ -38,7 +38,7 @@ class EconomicScreen extends StatelessWidget {
                 ),
                 Text(
                   item.description,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 )
               ],
             ),
@@ -51,12 +51,12 @@ class EconomicScreen extends StatelessWidget {
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    iconTheme: IconThemeData(
+                    iconTheme: const IconThemeData(
                       color: Colors.black,
                     ),
                     title: Text(
                       item.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                       ),
                     ),

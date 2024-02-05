@@ -22,7 +22,7 @@ class _AgeState extends State<Age> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Date of birth'),
+            const Text('Date of birth'),
             DatePickerWidget(
               locale: DateTimePickerLocale.en_us,
               looping: true,
@@ -48,7 +48,7 @@ class _AgeState extends State<Age> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -59,7 +59,7 @@ class _AgeState extends State<Age> {
                       Navigator.pop(context);
                     }
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             ),
@@ -72,25 +72,25 @@ class _AgeState extends State<Age> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Date of birth'),
+              const Text('Date of birth'),
               TextButton(
                 onPressed: () {
                   _showDatePickerModal();
                 },
-                child: Text('${_dateOfBirth}'),
+                child: Text('$_dateOfBirth'),
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Today'),
+              const Text('Today'),
               TextButton(
                 onPressed: () {},
                 child: Text('$today'),
@@ -102,7 +102,7 @@ class _AgeState extends State<Age> {
               borderRadius: BorderRadius.circular(10),
               color: Colors.blueGrey,
             ),
-            child: Column(
+            child: const Column(
               children: [
                 Row(
                   children: [
@@ -115,7 +115,7 @@ class _AgeState extends State<Age> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       child: VerticalDivider(
                         thickness: 1,
@@ -135,7 +135,7 @@ class _AgeState extends State<Age> {
                 Divider(
                   thickness: 1,
                 ),
-                const Column(
+                Column(
                   children: [
                     Text('Summary'),
                     Column(

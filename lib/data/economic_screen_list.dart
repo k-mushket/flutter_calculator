@@ -19,67 +19,67 @@ import 'package:flutter_calculator/screens/economic_screen/volume_page.dart';
 
 List<Item> economicItems = [
   Item(
-    widget: Age(),
+    widget: const Age(),
     iconData: FontAwesomeIcons.cakeCandles,
     description: 'Age',
   ),
   Item(
-    widget: Area(),
+    widget: const Area(),
     iconData: FontAwesomeIcons.square,
     description: 'Area',
   ),
   Item(
-    widget: Bmi(),
+    widget: const Bmi(),
     iconData: FontAwesomeIcons.weightScale,
     description: 'BMI',
   ),
   Item(
-    widget: Data(),
+    widget: const Data(),
     iconData: FontAwesomeIcons.database,
     description: 'Data',
   ),
   Item(
-    widget: Date(),
+    widget: const Date(),
     iconData: FontAwesomeIcons.calendar,
     description: 'Date',
   ),
   Item(
-    widget: Discount(),
+    widget: const Discount(),
     iconData: Icons.discount,
     description: 'Discount',
   ),
   Item(
-    widget: Length(),
+    widget: const Length(),
     iconData: FontAwesomeIcons.ruler,
     description: 'Length',
   ),
   Item(
-    widget: Mass(),
+    widget: const Mass(),
     iconData: FontAwesomeIcons.weightHanging,
     description: 'Mass',
   ),
   Item(
-    widget: NumeralSystem(),
+    widget: const NumeralSystem(),
     iconData: FontAwesomeIcons.listOl,
     description: 'Numeral system',
   ),
   Item(
-    widget: Speed(),
+    widget: const Speed(),
     iconData: FontAwesomeIcons.gauge,
     description: 'Speed',
   ),
   Item(
-    widget: Temperature(),
+    widget: const Temperature(),
     iconData: FontAwesomeIcons.temperatureFull,
     description: 'Temperature',
   ),
   Item(
-    widget: Time(),
+    widget: const Time(),
     iconData: FontAwesomeIcons.clock,
     description: 'Time',
   ),
   Item(
-    widget: Volume(),
+    widget: const Volume(),
     iconData: FontAwesomeIcons.cube,
     description: 'Volume',
   ),
@@ -87,17 +87,17 @@ List<Item> economicItems = [
 
 List<Item> additionalItems = [
   Item(
-    widget: Age(),
+    widget: const Age(),
     iconData: FontAwesomeIcons.dollarSign,
     description: 'Currency',
   ),
   Item(
-    widget: Area(),
+    widget: const Area(),
     iconData: FontAwesomeIcons.chartArea,
     description: 'Investment',
   ),
   Item(
-    widget: Bmi(),
+    widget: const Bmi(),
     iconData: FontAwesomeIcons.handHoldingDollar,
     description: 'Loan',
   ),

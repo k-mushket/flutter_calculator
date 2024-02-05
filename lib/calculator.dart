@@ -86,21 +86,23 @@ class _CalculatorState extends State<Calculator> {
               onSelected: (value) => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HistoryScreen(),
+                  builder: (context) => const HistoryScreen(),
                 ),
               ),
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 const PopupMenuItem<String>(
-                  padding: EdgeInsets.all(1),
                   value: 'History',
                   child: Row(
                     children: [
-                      Icon(Icons.history),
+                      Icon(Icons.history, size: 20),
                       SizedBox(width: 5),
-                      Text('History'),
+                      Text(
+                        'History',
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ],
                   ),
-                ),
+                )
               ],
               offset: const Offset(0, 40),
             ),
@@ -109,7 +111,7 @@ class _CalculatorState extends State<Calculator> {
       ),
       body: PageView(
         controller: _pageController,
-        children: [
+        children: const [
           CalculatorScreen(),
           EconomicScreen(),
           AdditionalScreen(),

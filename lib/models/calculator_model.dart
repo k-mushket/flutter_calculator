@@ -8,7 +8,7 @@ class CalculatorModel extends ChangeNotifier {
   var temp;
   double? inputTextSize = 52;
   double? previewResultTextSize = 26;
-  List<String> _historyStorage = [];
+  final List<String> _historyStorage = [];
   List<num> numbers = [];
   List<String> operators = [];
 
