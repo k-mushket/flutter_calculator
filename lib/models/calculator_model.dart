@@ -4,16 +4,21 @@ import 'dart:math';
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
   String _commonResult = '0';
+  String _historyExpression = '0';
+  String _historyCommonResult = '0';
+
   var temp;
   double? inputTextSize = 52;
   double? previewRTextSize = 26;
+  List<String> _historyStorage = [];
   List<num> numbers = [];
   List<String> operators = [];
 
+  List<String> get historyStorage => _historyStorage;
   String get input => _input;
   String get previewResult => _commonResult;
 
-  void changeSize() {
+  void _changeSize() {
     previewRTextSize = 52;
     inputTextSize = 26;
   }
@@ -105,13 +110,22 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void evaluateExpression() {
-    _commonResult;
-    changeSize();
+    _historyStorage.add('$_input \n= $_commonResult');
+    _changeSize();
+
+    if (_historyStorage.isNotEmpty) {
+      _input = '0';
+      _commonResult = '0';
+      inputTextSize = 52;
+      previewRTextSize = 26;
+    }
+
     notifyListeners();
   }
 
   void eraseExpression() {
     _input = '0';
+    _commonResult = '0';
     inputTextSize = 52;
     previewRTextSize = 26;
     notifyListeners();

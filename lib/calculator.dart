@@ -42,7 +42,7 @@ class _CalculatorState extends State<Calculator> {
   void _navigateTo(int pageIndex) {
     _pageController.animateToPage(
       pageIndex,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }
@@ -59,7 +59,7 @@ class _CalculatorState extends State<Calculator> {
           children: [
             IconButton(
               onPressed: () {},
-              icon: FaIcon(FontAwesomeIcons.downLeftAndUpRightToCenter),
+              icon: const FaIcon(FontAwesomeIcons.downLeftAndUpRightToCenter),
             ),
             IconButton(
               onPressed: () => _navigateTo(0),
@@ -82,17 +82,6 @@ class _CalculatorState extends State<Calculator> {
                 color: _currentPage == 2 ? Colors.orange : Colors.black,
               ),
             ),
-            // IconButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => HistoryScreen(),
-            //       ),
-            //     );
-            //   },
-            //   icon: Icon(Icons.more_vert),
-            // ),
             PopupMenuButton(
               onSelected: (value) => Navigator.push(
                 context,
@@ -102,10 +91,18 @@ class _CalculatorState extends State<Calculator> {
               ),
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 const PopupMenuItem<String>(
+                  padding: EdgeInsets.all(1),
                   value: 'History',
-                  child: Text('History'),
+                  child: Row(
+                    children: [
+                      Icon(Icons.history),
+                      SizedBox(width: 5),
+                      Text('History'),
+                    ],
+                  ),
                 ),
               ],
+              offset: Offset(0, 40),
             ),
           ],
         ),
