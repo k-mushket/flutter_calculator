@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_calculator/models/calculator_model.dart';
 
 class CalculatorDisplay extends StatelessWidget {
-  CalculatorDisplay({super.key});
+  const CalculatorDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,13 @@ class CalculatorDisplay extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ...model.historyStorage.map((e) => Text(e)),
+            ...model.historyStorage.map(
+              (e) => Text(
+                e,
+                textAlign: TextAlign.end,
+                style: const TextStyle(fontSize: 26),
+              ),
+            ),
             Text(
               model.input,
               style: TextStyle(fontSize: model.inputTextSize),
@@ -21,7 +27,7 @@ class CalculatorDisplay extends StatelessWidget {
             if (model.input != '0')
               Text(
                 '=${model.previewResult}',
-                style: TextStyle(fontSize: model.previewRTextSize),
+                style: TextStyle(fontSize: model.previewResultTextSize),
               ),
           ],
         );

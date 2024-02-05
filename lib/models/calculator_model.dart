@@ -9,7 +9,7 @@ class CalculatorModel extends ChangeNotifier {
 
   var temp;
   double? inputTextSize = 52;
-  double? previewRTextSize = 26;
+  double? previewResultTextSize = 26;
   List<String> _historyStorage = [];
   List<num> numbers = [];
   List<String> operators = [];
@@ -19,7 +19,7 @@ class CalculatorModel extends ChangeNotifier {
   String get previewResult => _commonResult;
 
   void _changeSize() {
-    previewRTextSize = 52;
+    previewResultTextSize = 52;
     inputTextSize = 26;
   }
 
@@ -114,10 +114,7 @@ class CalculatorModel extends ChangeNotifier {
     _changeSize();
 
     if (_historyStorage.isNotEmpty) {
-      _input = '0';
-      _commonResult = '0';
-      inputTextSize = 52;
-      previewRTextSize = 26;
+      eraseExpression();
     }
 
     notifyListeners();
@@ -127,14 +124,14 @@ class CalculatorModel extends ChangeNotifier {
     _input = '0';
     _commonResult = '0';
     inputTextSize = 52;
-    previewRTextSize = 26;
+    previewResultTextSize = 26;
     notifyListeners();
   }
 
   void removeLastChar() {
     if (_input.length == 1) {
       inputTextSize = 52;
-      previewRTextSize = 26;
+      previewResultTextSize = 26;
       _input = '0';
     } else if (_input.isNotEmpty) {
       _input = _input.substring(0, _input.length - 1);
