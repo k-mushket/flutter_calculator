@@ -128,6 +128,10 @@ class CalculatorModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeHistory() {
+    _historyStorage.clear();
+  }
+
   void removeLastChar() {
     if (_input.length == 1) {
       inputTextSize = 52;
