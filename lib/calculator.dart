@@ -16,6 +16,7 @@ class Calculator extends StatefulWidget with WidgetsBindingObserver {
 class _CalculatorState extends State<Calculator> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  bool historyPop = false;
 
   @override
   void initState() {
@@ -42,24 +43,73 @@ class _CalculatorState extends State<Calculator> {
   void _navigateTo(int pageIndex) {
     _pageController.animateToPage(
       pageIndex,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _showOverlay(BuildContext context) {
+    OverlayEntry? overlayEntry;
+
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).size.height * 0.12,
+        right: MediaQuery.of(context).size.width * 0.06,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 4,
+                  color: Colors.black26,
+                ),
+              ],
+            ),
+            child: GestureDetector(
+              onTap: () {
+                overlayEntry?.remove();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const HistoryScreen(),
+                  ),
+                );
+              },
+              child: const Row(
+                children: [
+                  Icon(Icons.history),
+                  SizedBox(width: 5),
+                  Text('History'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Colors.black,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: const FaIcon(FontAwesomeIcons.downLeftAndUpRightToCenter),
+            Visibility(
+              visible: _currentPage == 0,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(FontAwesomeIcons.downLeftAndUpRightToCenter),
+              ),
             ),
             IconButton(
               onPressed: () => _navigateTo(0),
@@ -71,51 +121,40 @@ class _CalculatorState extends State<Calculator> {
             IconButton(
               onPressed: () => _navigateTo(1),
               icon: Icon(
-                FontAwesomeIcons.tableCells,
+                Icons.grid_view,
                 color: _currentPage == 1 ? Colors.orange : Colors.black,
               ),
             ),
             IconButton(
               onPressed: () => _navigateTo(2),
               icon: Icon(
-                FontAwesomeIcons.sackDollar,
+                FontAwesomeIcons.circleDollarToSlot,
                 color: _currentPage == 2 ? Colors.orange : Colors.black,
               ),
             ),
-            PopupMenuButton(
-              onSelected: (value) => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HistoryScreen(),
-                ),
+            Visibility(
+              visible: _currentPage == 0,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: IconButton(
+                onPressed: () => _showOverlay(context),
+                icon: const Icon(Icons.more_vert),
               ),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                const PopupMenuItem<String>(
-                  value: 'History',
-                  child: Row(
-                    children: [
-                      Icon(Icons.history, size: 20),
-                      SizedBox(width: 5),
-                      Text(
-                        'History',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-              offset: const Offset(0, 40),
             ),
           ],
         ),
       ),
-      body: PageView(
-        controller: _pageController,
-        children: const [
-          CalculatorScreen(),
-          EconomicScreen(),
-          AdditionalScreen(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: PageView(
+          controller: _pageController,
+          children: const [
+            CalculatorScreen(),
+            EconomicScreen(),
+            AdditionalScreen(),
+          ],
+        ),
       ),
     );
   }
