@@ -4,8 +4,6 @@ import 'dart:math';
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
   String _commonResult = '0';
-  String _historyExpression = '0';
-  String _historyCommonResult = '0';
 
   var temp;
   double? inputTextSize = 52;
@@ -130,6 +128,7 @@ class CalculatorModel extends ChangeNotifier {
 
   void removeHistory() {
     _historyStorage.clear();
+    notifyListeners();
   }
 
   void removeLastChar() {

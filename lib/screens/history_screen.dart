@@ -25,8 +25,8 @@ class HistoryScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pop;
-              model.removeHistory;
+              Navigator.of(context).pop();
+              model.removeHistory();
             },
             icon: Icon(Icons.delete_outline),
           ),
