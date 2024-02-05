@@ -102,7 +102,7 @@ class _CalculatorState extends State<Calculator> {
                   ),
                 ),
               ],
-              offset: Offset(0, 40),
+              offset: const Offset(0, 40),
             ),
           ],
         ),

@@ -15,23 +15,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     return Column(
       children: [
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                margin: EdgeInsets.all(20),
-                alignment: Alignment.bottomRight,
-                child: CalculatorDisplay(),
-              ),
-            ],
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            alignment: Alignment.bottomRight,
+            child: const SingleChildScrollView(
+              child: CalculatorDisplay(),
+            ),
           ),
         ),
-        Divider(
+        const Divider(
           indent: 20,
           endIndent: 20,
         ),
-        Expanded(child: CalculatorKeypad()),
+        const Expanded(child: CalculatorKeypad()),
       ],
     );
   }
