@@ -1,11 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'dart:math';
 
+
+//TODO: Prioritising the order of operations
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
   String _commonResult = '0';
 
-  var temp;
+  dynamic temp;
   double? inputTextSize = 52;
   double? previewResultTextSize = 26;
   final List<String> _historyStorage = [];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/pip.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_calculator/screens/history_screen.dart';
@@ -107,7 +108,9 @@ class _CalculatorState extends State<Calculator> {
               maintainAnimation: true,
               maintainState: true,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  PiPService.enterPiPMode();
+                },
                 icon: const Icon(FontAwesomeIcons.downLeftAndUpRightToCenter),
               ),
             ),
