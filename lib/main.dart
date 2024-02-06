@@ -13,8 +13,11 @@ void main() {
     runApp(
       ChangeNotifierProvider(
         create: (context) => CalculatorModel(),
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: ThemeMode.system,
           home: Calculator(),
         ),
       ),

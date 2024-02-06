@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/pip.dart';
+import 'package:flutter_calculator/services/pip.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_calculator/screens/history_screen.dart';
@@ -17,7 +17,7 @@ class Calculator extends StatefulWidget with WidgetsBindingObserver {
 class _CalculatorState extends State<Calculator> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  bool historyPop = false;
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
@@ -50,9 +50,11 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void _showOverlay(BuildContext context) {
-    OverlayEntry? overlayEntry;
+    if (_overlayEntry != null) {
+      return;
+    }
 
-    overlayEntry = OverlayEntry(
+    _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         top: MediaQuery.of(context).size.height * 0.12,
         right: MediaQuery.of(context).size.width * 0.06,
@@ -72,7 +74,8 @@ class _CalculatorState extends State<Calculator> {
             ),
             child: GestureDetector(
               onTap: () {
-                overlayEntry?.remove();
+                _overlayEntry?.remove();
+                _overlayEntry = null;
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const HistoryScreen(),
@@ -92,7 +95,7 @@ class _CalculatorState extends State<Calculator> {
       ),
     );
 
-    Overlay.of(context).insert(overlayEntry);
+    Overlay.of(context).insert(_overlayEntry!);
   }
 
   @override
