@@ -55,22 +55,17 @@ class _CalculatorState extends State<Calculator> {
     }
 
     _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: MediaQuery.of(context).size.height * 0.12,
-        right: MediaQuery.of(context).size.width * 0.06,
-        child: Material(
+      builder: (context) => Material(
+        color: Colors.transparent,
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            _overlayEntry?.remove();
+            _overlayEntry = null;
+          },
           child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 4,
-                  color: Colors.black26,
-                ),
-              ],
-            ),
+            color: Colors.transparent,
+            alignment: Alignment.topRight,
             child: GestureDetector(
               onTap: () {
                 _overlayEntry?.remove();
@@ -81,20 +76,38 @@ class _CalculatorState extends State<Calculator> {
                   ),
                 );
               },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.history,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    'History',
-                    style: TextStyle(
+              child: Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.12,
+                  right: MediaQuery.of(context).size.width * 0.06,
+                ),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.history,
                       color: Theme.of(context).colorScheme.secondary,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 5),
+                    Text(
+                      'History',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
