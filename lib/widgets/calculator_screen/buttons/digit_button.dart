@@ -20,7 +20,8 @@ class DigitButton extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: Colors.grey.withOpacity(0.1),
+              splashColor:
+                  Theme.of(context).colorScheme.tertiary.withOpacity(0.2),
               onTap: action,
               borderRadius: BorderRadius.circular(50),
               child: Container(

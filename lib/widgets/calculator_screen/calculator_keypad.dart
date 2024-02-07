@@ -226,7 +226,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               action: () {
                 model.evaluateExpression();
               },
-              color: Colors.orange,
+              color: Colors.deepOrange,
               text: numbers.numbers[19],
             ),
           ],

@@ -17,7 +17,10 @@ class CalculatorDisplay extends StatelessWidget {
               (e) => Text(
                 e,
                 textAlign: TextAlign.end,
-                style: const TextStyle(fontSize: 26),
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ),
             Text(

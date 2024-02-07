@@ -18,9 +18,9 @@ class OperatorButton extends StatelessWidget {
       child: Center(
         child: ClipOval(
           child: Material(
-            color: Colors.transparent,
+            color: color,
             child: InkWell(
-              splashColor: Colors.grey.withOpacity(0.1),
+              splashColor: Theme.of(context).colorScheme.tertiary,
               onTap: action,
               borderRadius: BorderRadius.circular(50),
               child: Container(
@@ -34,7 +34,9 @@ class OperatorButton extends StatelessWidget {
                     text,
                     style: TextStyle(
                       fontSize: 20,
-                      color: Theme.of(context).colorScheme.surface,
+                      color: (color == null)
+                          ? Theme.of(context).colorScheme.surface
+                          : Colors.white,
                     ),
                   ),
                 ),
