@@ -10,29 +10,54 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+  int flexDisplay = 1;
+  int flexKeypad = 1;
+
+  void updateFlexValues() {
+    if (flexDisplay == 1 && flexKeypad == 1) {
+      setState(() {
+        flexDisplay = 2;
+        flexKeypad = 3;
+      });
+    } else {
+      setState(() {
+        flexDisplay = 1;
+        flexKeypad = 1;
+      });
+    }
+  } 
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            alignment: Alignment.bottomRight,
-            child: const SingleChildScrollView(
-              child: CalculatorDisplay(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Column(
+          children: <Widget>[
+            Flexible(
+              flex: flexDisplay,
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                alignment: Alignment.bottomRight,
+                child: const SingleChildScrollView(
+                  child: CalculatorDisplay(),
+                ),
+              ),
             ),
-          ),
-        ),
-        const Divider(
-          indent: 20,
-          endIndent: 20,
-          thickness: 0.3,
-        ),
-        const SizedBox(height: 15),
-        const Expanded(
-          child: CalculatorKeypad(),
-        ),
-      ],
+            const Divider(
+              indent: 20,
+              endIndent: 20,
+              thickness: 0.3,
+            ),
+            const SizedBox(height: 10),
+            Flexible(
+              flex: flexKeypad,
+              child: CalculatorKeypad(
+                updateFlexCallback: updateFlexValues,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

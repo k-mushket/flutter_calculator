@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_calculator/data/character_list.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_calculator/widgets/calculator_screen/buttons/operator_bu
 import 'package:flutter_calculator/widgets/calculator_screen/buttons/expanded_button.dart';
 
 class CalculatorKeypad extends StatefulWidget {
-  const CalculatorKeypad({super.key});
+  CalculatorKeypad({super.key, required this.updateFlexCallback});
+
+  final Function() updateFlexCallback;
 
   @override
   State<CalculatorKeypad> createState() => _CalculatorKeypadState();
@@ -30,6 +33,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (isExpanded) ...[
           Row(
@@ -194,7 +198,10 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
         Row(
           children: [
             OperatorButton(
-              action: () => toggleKeyboard(),
+              action: () {
+                toggleKeyboard();
+                widget.updateFlexCallback();
+              },
               text: numbers.numbers[16],
             ),
             if (isExpanded) ...[

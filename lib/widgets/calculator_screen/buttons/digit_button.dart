@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class DigitButton extends StatelessWidget {
-  const DigitButton(
-      {super.key, this.color, required this.action, required this.text});
+  const DigitButton({
+    super.key,
+    this.color,
+    required this.action,
+    required this.text,
+  });
 
   final Color? color;
   final void Function() action;
@@ -11,15 +15,31 @@ class DigitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: TextButton(
-        onPressed: action,
-        style: TextButton.styleFrom(
-          foregroundColor: Theme.of(context).colorScheme.secondary,
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 24,
+      child: Center(
+        child: ClipOval(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.grey.withOpacity(0.1),
+              onTap: action,
+              borderRadius: BorderRadius.circular(50),
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Center(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
