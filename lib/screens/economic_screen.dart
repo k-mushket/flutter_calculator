@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_calculator/models/item.dart';
 import 'package:flutter_calculator/data/economic_screen_list.dart';
+import 'package:flutter_calculator/models/item.dart';
 
 class EconomicScreen extends StatelessWidget {
   const EconomicScreen({super.key});
@@ -9,6 +9,7 @@ class EconomicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
@@ -18,13 +19,9 @@ class EconomicScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         Item item = economicItems[index];
 
-        return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            disabledForegroundColor: Colors.transparent,
-            elevation: 0,
-          ),
+        return InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,6 +35,7 @@ class EconomicScreen extends StatelessWidget {
                 ),
                 Text(
                   item.description,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -45,7 +43,7 @@ class EconomicScreen extends StatelessWidget {
               ],
             ),
           ),
-          onPressed: () {
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(

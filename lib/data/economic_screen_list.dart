@@ -17,7 +17,7 @@ import 'package:flutter_calculator/screens/economic_screen/temperature_page.dart
 import 'package:flutter_calculator/screens/economic_screen/time_page.dart';
 import 'package:flutter_calculator/screens/economic_screen/volume_page.dart';
 
-List<Item> economicItems = [
+List<Item> measurementItems = [
   Item(
     widget: const Age(),
     iconData: FontAwesomeIcons.cakeCandles,
@@ -85,7 +85,7 @@ List<Item> economicItems = [
   ),
 ];
 
-List<Item> additionalItems = [
+List<Item> economicItems = [
   Item(
     widget: const Age(),
     iconData: FontAwesomeIcons.dollarSign,

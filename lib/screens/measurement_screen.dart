@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_calculator/data/economic_screen_list.dart';
 import 'package:flutter_calculator/models/item.dart';
+import 'package:flutter_calculator/data/economic_screen_list.dart';
 
-class AdditionalScreen extends StatelessWidget {
-  const AdditionalScreen({super.key});
+class MeasurementScreen extends StatelessWidget {
+  const MeasurementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      itemCount: additionalItems.length,
+      itemCount: measurementItems.length,
       itemBuilder: (context, index) {
-        Item item = additionalItems[index];
-
-        return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            disabledForegroundColor: Colors.transparent,
-            elevation: 0,
-          ),
+        Item item = measurementItems[index];
+        return InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,6 +33,7 @@ class AdditionalScreen extends StatelessWidget {
                 ),
                 Text(
                   item.description,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -46,7 +41,7 @@ class AdditionalScreen extends StatelessWidget {
               ],
             ),
           ),
-          onPressed: () {
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -55,7 +50,7 @@ class AdditionalScreen extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     iconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     title: Text(
                       item.description,

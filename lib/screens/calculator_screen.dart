@@ -28,11 +28,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           endIndent: 20,
           thickness: 0.3,
         ),
-        Expanded(
-          child: Container(
-            margin: const EdgeInsets.only(top: 15),
-            child: const CalculatorKeypad(),
-          ),
+        const SizedBox(height: 15),
+        const Expanded(
+          child: CalculatorKeypad(),
         ),
       ],
     );

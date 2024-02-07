@@ -3,9 +3,9 @@ import 'package:flutter_calculator/services/pip.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_calculator/screens/history_screen.dart';
-import 'package:flutter_calculator/screens/additional_screen.dart';
-import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:flutter_calculator/screens/economic_screen.dart';
+import 'package:flutter_calculator/screens/calculator_screen.dart';
+import 'package:flutter_calculator/screens/measurement_screen.dart';
 
 class Calculator extends StatefulWidget with WidgetsBindingObserver {
   const Calculator({super.key});
@@ -136,6 +136,7 @@ class _CalculatorState extends State<Calculator> {
                 },
                 style: IconButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.primary,
+                  iconSize: 16,
                 ),
                 icon: const Icon(FontAwesomeIcons.downLeftAndUpRightToCenter),
               ),
@@ -192,8 +193,8 @@ class _CalculatorState extends State<Calculator> {
           controller: _pageController,
           children: const [
             CalculatorScreen(),
+            MeasurementScreen(),
             EconomicScreen(),
-            AdditionalScreen(),
           ],
         ),
       ),
