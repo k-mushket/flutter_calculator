@@ -3,8 +3,15 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_calculator/models/calculator_model.dart';
 
-class CalculatorDisplay extends StatelessWidget {
+class CalculatorDisplay extends StatefulWidget {
   const CalculatorDisplay({super.key});
+
+  @override
+  State<CalculatorDisplay> createState() => _CalculatorDisplayState();
+}
+
+class _CalculatorDisplayState extends State<CalculatorDisplay> {
+
 
   @override
   Widget build(BuildContext context) {

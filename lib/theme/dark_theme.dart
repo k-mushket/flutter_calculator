@@ -9,6 +9,6 @@ ThemeData darkTheme = ThemeData(
     secondary: Color.fromARGB(220, 255, 255, 255),
     tertiary: Colors.grey[500],
     primaryContainer: Colors.grey[900],
-    surface: Colors.deepOrange,
+    surface: Colors.deepOrangeAccent,
   ),
 );

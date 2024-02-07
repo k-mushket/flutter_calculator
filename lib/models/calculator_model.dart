@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'dart:math';
 
-
 //TODO: Prioritising the order of operations
 class CalculatorModel extends ChangeNotifier {
   String _input = '0';
@@ -13,6 +12,11 @@ class CalculatorModel extends ChangeNotifier {
   final List<String> _historyStorage = [];
   List<num> numbers = [];
   List<String> operators = [];
+
+  set input(e) {
+    _input = e;
+    notifyListeners();
+  }
 
   List<String> get historyStorage => _historyStorage;
   String get input => _input;

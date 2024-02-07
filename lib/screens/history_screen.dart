@@ -40,12 +40,20 @@ class HistoryScreen extends StatelessWidget {
               reverse: true,
               children: [
                 ...model.historyStorage.map(
-                  (e) => Text(
-                    e,
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Theme.of(context).colorScheme.primary,
+                  (e) => GestureDetector(
+                    onTap: () {
+                      int indexSignEqual = e.indexOf('=');
+                      var expression = e.substring(0, indexSignEqual);
+                      model.input = expression;
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      e,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
                 ),
