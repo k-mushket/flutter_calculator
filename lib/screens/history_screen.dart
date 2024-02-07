@@ -13,13 +13,13 @@ class HistoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(
-          color: Colors.black,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.secondary,
         ),
-        title: const Text(
+        title: Text(
           'History',
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         actions: [

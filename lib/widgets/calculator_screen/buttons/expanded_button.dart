@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/theme/colors.dart';
 
 class ExtendedButton extends StatelessWidget {
   const ExtendedButton(
@@ -15,7 +14,7 @@ class ExtendedButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: extendedColor,
+          foregroundColor: Theme.of(context).colorScheme.primary,
         ),
         child: Text(
           text,

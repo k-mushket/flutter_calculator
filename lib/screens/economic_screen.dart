@@ -33,12 +33,14 @@ class EconomicScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(12.0),
                   child: Icon(
                     item.iconData,
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
                 Text(
                   item.description,
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 )
               ],
             ),
@@ -51,13 +53,13 @@ class EconomicScreen extends StatelessWidget {
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    iconTheme: const IconThemeData(
-                      color: Colors.black,
+                    iconTheme: IconThemeData(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     title: Text(
                       item.description,
-                      style: const TextStyle(
-                        color: Colors.black,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     centerTitle: true,

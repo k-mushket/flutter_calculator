@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/theme/colors.dart';
 
 class DigitButton extends StatelessWidget {
   const DigitButton(
@@ -15,7 +14,7 @@ class DigitButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: numbersColor,
+          foregroundColor: Theme.of(context).colorScheme.secondary,
         ),
         child: Text(
           text,

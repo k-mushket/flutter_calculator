@@ -59,11 +59,10 @@ class _CalculatorState extends State<Calculator> {
         top: MediaQuery.of(context).size.height * 0.12,
         right: MediaQuery.of(context).size.width * 0.06,
         child: Material(
-          color: Colors.transparent,
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
                 BoxShadow(
@@ -82,11 +81,19 @@ class _CalculatorState extends State<Calculator> {
                   ),
                 );
               },
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.history),
-                  SizedBox(width: 5),
-                  Text('History'),
+                  Icon(
+                    Icons.history,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    'History',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -114,28 +121,43 @@ class _CalculatorState extends State<Calculator> {
                 onPressed: () {
                   PiPService.enterPiPMode();
                 },
+                style: IconButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                ),
                 icon: const Icon(FontAwesomeIcons.downLeftAndUpRightToCenter),
               ),
             ),
             IconButton(
               onPressed: () => _navigateTo(0),
-              icon: Icon(
+              style: IconButton.styleFrom(
+                foregroundColor: _currentPage == 0
+                    ? Colors.orange
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              icon: const Icon(
                 FontAwesomeIcons.equals,
-                color: _currentPage == 0 ? Colors.orange : Colors.black,
               ),
             ),
             IconButton(
               onPressed: () => _navigateTo(1),
-              icon: Icon(
+              style: IconButton.styleFrom(
+                foregroundColor: _currentPage == 1
+                    ? Colors.orange
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              icon: const Icon(
                 Icons.grid_view,
-                color: _currentPage == 1 ? Colors.orange : Colors.black,
               ),
             ),
             IconButton(
               onPressed: () => _navigateTo(2),
-              icon: Icon(
+              style: IconButton.styleFrom(
+                foregroundColor: _currentPage == 2
+                    ? Colors.orange
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              icon: const Icon(
                 FontAwesomeIcons.circleDollarToSlot,
-                color: _currentPage == 2 ? Colors.orange : Colors.black,
               ),
             ),
             Visibility(

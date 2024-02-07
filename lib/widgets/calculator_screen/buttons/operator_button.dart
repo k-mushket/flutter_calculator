@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/theme/colors.dart';
 
 class OperatorButton extends StatelessWidget {
   const OperatorButton({
@@ -19,7 +18,7 @@ class OperatorButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: operationColor,
+          foregroundColor: Colors.orange,
         ),
         child: Text(
           text,

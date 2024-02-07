@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_calculator/calculator.dart';
 import 'package:flutter_calculator/models/calculator_model.dart';
+import 'package:flutter_calculator/theme/dark_theme.dart';
+import 'package:flutter_calculator/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,8 +17,8 @@ void main() {
         create: (context) => CalculatorModel(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
+          theme: lightTheme,
+          darkTheme: darkTheme,
           themeMode: ThemeMode.system,
           home: Calculator(),
         ),

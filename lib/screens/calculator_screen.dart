@@ -26,8 +26,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         const Divider(
           indent: 20,
           endIndent: 20,
+          thickness: 0.3,
         ),
-        const Expanded(child: CalculatorKeypad()),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(top: 15),
+            child: const CalculatorKeypad(),
+          ),
+        ),
       ],
     );
   }
