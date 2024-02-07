@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_calculator/data/character_list.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_calculator/widgets/calculator_screen/buttons/operator_bu
 import 'package:flutter_calculator/widgets/calculator_screen/buttons/expanded_button.dart';
 
 class CalculatorKeypad extends StatefulWidget {
-  CalculatorKeypad({super.key, required this.updateFlexCallback});
+  const CalculatorKeypad({super.key, required this.updateFlexCallback});
 
   final Function() updateFlexCallback;
 
@@ -226,7 +225,7 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               action: () {
                 model.evaluateExpression();
               },
-              color: Colors.deepOrange,
+              color: Colors.deepOrangeAccent,
               text: numbers.numbers[19],
             ),
           ],

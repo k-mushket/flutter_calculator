@@ -11,8 +11,7 @@ class HistoryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         iconTheme: IconThemeData(
           color: Theme.of(context).colorScheme.secondary,
         ),
@@ -44,7 +43,10 @@ class HistoryScreen extends StatelessWidget {
                   (e) => Text(
                     e,
                     textAlign: TextAlign.end,
-                    style: const TextStyle(fontSize: 26),
+                    style: TextStyle(
+                      fontSize: 26,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],

@@ -20,7 +20,7 @@ class ExtendedButton extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: Theme.of(context).colorScheme.tertiary,
+              splashColor: Theme.of(context).colorScheme.tertiary.withOpacity(0.2),
               onTap: action,
               borderRadius: BorderRadius.circular(50),
               child: Container(

@@ -25,7 +25,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         flexKeypad = 1;
       });
     }
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 alignment: Alignment.bottomRight,
                 child: const SingleChildScrollView(
-                  child: CalculatorDisplay(),
+                  reverse: true,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: CalculatorDisplay(),
+                  ),
                 ),
               ),
             ),

@@ -18,19 +18,23 @@ class CalculatorDisplay extends StatelessWidget {
                 e,
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 22,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
             Text(
               model.input,
-              style: TextStyle(fontSize: model.inputTextSize),
+              style: TextStyle(
+                  fontSize: model.inputTextSize,
+                  color: Theme.of(context).colorScheme.secondary),
             ),
             if (model.input != '0')
               Text(
                 '=${model.previewResult}',
-                style: TextStyle(fontSize: model.previewResultTextSize),
+                style: TextStyle(
+                    fontSize: model.previewResultTextSize,
+                    color: Theme.of(context).colorScheme.secondary),
               ),
           ],
         );
