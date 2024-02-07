@@ -144,7 +144,7 @@ class _CalculatorState extends State<Calculator> {
               onPressed: () => _navigateTo(0),
               style: IconButton.styleFrom(
                 foregroundColor: _currentPage == 0
-                    ? Colors.orange
+                    ? Theme.of(context).colorScheme.surface
                     : Theme.of(context).colorScheme.primary,
               ),
               icon: const Icon(
@@ -155,7 +155,7 @@ class _CalculatorState extends State<Calculator> {
               onPressed: () => _navigateTo(1),
               style: IconButton.styleFrom(
                 foregroundColor: _currentPage == 1
-                    ? Colors.orange
+                    ? Theme.of(context).colorScheme.surface
                     : Theme.of(context).colorScheme.primary,
               ),
               icon: const Icon(
@@ -166,7 +166,7 @@ class _CalculatorState extends State<Calculator> {
               onPressed: () => _navigateTo(2),
               style: IconButton.styleFrom(
                 foregroundColor: _currentPage == 2
-                    ? Colors.orange
+                    ? Theme.of(context).colorScheme.surface
                     : Theme.of(context).colorScheme.primary,
               ),
               icon: const Icon(

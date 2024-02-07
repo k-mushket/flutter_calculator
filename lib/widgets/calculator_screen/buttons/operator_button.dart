@@ -18,7 +18,7 @@ class OperatorButton extends StatelessWidget {
       child: TextButton(
         onPressed: action,
         style: TextButton.styleFrom(
-          foregroundColor: Colors.orange,
+          foregroundColor: Theme.of(context).colorScheme.surface,
         ),
         child: Text(
           text,

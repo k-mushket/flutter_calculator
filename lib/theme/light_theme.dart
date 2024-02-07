@@ -9,5 +9,6 @@ ThemeData lightTheme = ThemeData(
     secondary: Colors.black,
     tertiary: Colors.grey[800],
     primaryContainer: Colors.white,
+    surface: Colors.deepOrange,
   ),
 );

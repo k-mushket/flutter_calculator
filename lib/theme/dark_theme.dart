@@ -9,5 +9,6 @@ ThemeData darkTheme = ThemeData(
     secondary: Colors.white,
     tertiary: Colors.grey[500],
     primaryContainer: Colors.grey[900],
+    surface: Colors.deepOrange,
   ),
 );

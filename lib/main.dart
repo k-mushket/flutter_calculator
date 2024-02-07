@@ -20,7 +20,7 @@ void main() {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: ThemeMode.system,
-          home: Calculator(),
+          home: const Calculator(),
         ),
       ),
     );
