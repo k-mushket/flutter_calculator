@@ -42,8 +42,8 @@ class HistoryScreen extends StatelessWidget {
                 ...model.historyStorage.map(
                   (e) => GestureDetector(
                     onTap: () {
-                      int indexSignEqual = e.indexOf('=');
-                      var expression = e.substring(0, indexSignEqual);
+                      int indexSignEquals = e.indexOf('\n');
+                      var expression = e.substring(0, indexSignEquals);
                       model.input = expression;
                       Navigator.of(context).pop();
                     },

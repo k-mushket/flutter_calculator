@@ -114,7 +114,7 @@ class CalculatorModel extends ChangeNotifier {
   }
 
   void evaluateExpression() {
-    _historyStorage.add('$_input \n= $_commonResult');
+    _historyStorage.add('$_input\n=$_commonResult');
     _changeSize();
 
     if (_historyStorage.isNotEmpty) {

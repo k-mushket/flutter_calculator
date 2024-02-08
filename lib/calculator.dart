@@ -78,10 +78,10 @@ class _CalculatorState extends State<Calculator> {
               },
               child: Container(
                 margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.12,
+                  top: MediaQuery.of(context).size.height * 0.11,
                   right: MediaQuery.of(context).size.width * 0.06,
                 ),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(8),
@@ -99,7 +99,7 @@ class _CalculatorState extends State<Calculator> {
                       Icons.history,
                       color: Theme.of(context).colorScheme.secondary,
                     ),
-                    const SizedBox(width: 5),
+                    const SizedBox(width: 8),
                     Text(
                       'History',
                       style: TextStyle(
