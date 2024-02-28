@@ -113,6 +113,12 @@ class CalculatorProvider extends ChangeNotifier {
     }
   }
 
+  void updateAndPreviewExpression(String expression) {
+    _input = expression;
+    _previewExpression();
+    notifyListeners();
+  }
+
   void evaluateExpression() {
     _historyStorage.add('$_input\n=$_commonResult');
     _changeSize();
