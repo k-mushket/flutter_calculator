@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/services/pip.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter_calculator/screens/history_screen.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_calculator/screens/economic_screen.dart';
 import 'package:flutter_calculator/screens/calculator_screen.dart';
 import 'package:flutter_calculator/screens/measurement_screen.dart';
 
-class Calculator extends StatefulWidget with WidgetsBindingObserver {
+class Calculator extends StatefulWidget {
   const Calculator({super.key});
 
   @override
@@ -25,13 +24,6 @@ class _CalculatorState extends State<Calculator> {
     _pageController.addListener(_pageChanged);
   }
 
-  @override
-  void dispose() {
-    _pageController.removeListener(_pageChanged);
-    _pageController.dispose();
-    super.dispose();
-  }
-
   void _pageChanged() {
     int? currentPage = _pageController.page?.round();
     if (currentPage != null && currentPage != _currentPage) {
@@ -47,6 +39,13 @@ class _CalculatorState extends State<Calculator> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.removeListener(_pageChanged);
+    _pageController.dispose();
+    super.dispose();
   }
 
   void _showOverlay(BuildContext context) {
@@ -131,9 +130,7 @@ class _CalculatorState extends State<Calculator> {
               maintainAnimation: true,
               maintainState: true,
               child: IconButton(
-                onPressed: () {
-                  PiPService.enterPiPMode();
-                },
+                onPressed: () {},
                 style: IconButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.primary,
                   iconSize: 16,

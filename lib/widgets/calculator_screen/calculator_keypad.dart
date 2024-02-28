@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_calculator/data/character_list.dart';
-import 'package:flutter_calculator/models/calculator_model.dart';
+import 'package:flutter_calculator/providers/calculator_input.dart';
 import 'package:flutter_calculator/widgets/calculator_screen/buttons/digit_button.dart';
 import 'package:flutter_calculator/widgets/calculator_screen/buttons/operator_button.dart';
 import 'package:flutter_calculator/widgets/calculator_screen/buttons/expanded_button.dart';
@@ -16,19 +18,42 @@ class CalculatorKeypad extends StatefulWidget {
   State<CalculatorKeypad> createState() => _CalculatorKeypadState();
 }
 
-class _CalculatorKeypadState extends State<CalculatorKeypad> {
+class _CalculatorKeypadState extends State<CalculatorKeypad>
+    with SingleTickerProviderStateMixin {
   bool isExpanded = false;
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+  }
 
   void toggleKeyboard() {
     setState(() {
       isExpanded = !isExpanded;
     });
+    if (isExpanded) {
+      _animationController.forward();
+    } else {
+      _animationController.reverse();
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     var numbers = CharacterList();
-    var model = Provider.of<CalculatorModel>(context, listen: false);
+    var buttonProvider =
+        Provider.of<CalculatorProvider>(context, listen: false);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,10 +75,10 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
               ExtendedButton(action: () {}, text: numbers.expanded[6]),
               ExtendedButton(action: () {}, text: numbers.expanded[7]),
               ExtendedButton(
-                  action: () => model.checkInput('('),
+                  action: () => buttonProvider.checkInput(numbers.expanded[8]),
                   text: numbers.expanded[8]),
               ExtendedButton(
-                  action: () => model.checkInput(')'),
+                  action: () => buttonProvider.checkInput(numbers.expanded[9]),
                   text: numbers.expanded[9]),
             ],
           ),
@@ -62,31 +87,31 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
           children: [
             if (isExpanded) ...[
               ExtendedButton(
-                action: () => model.checkInput('√'),
+                action: () => buttonProvider.checkInput('√'),
                 text: numbers.expanded[10],
               ),
             ],
             OperatorButton(
               action: () {
-                model.eraseExpression();
+                buttonProvider.eraseExpression();
               },
               text: numbers.numbers[0],
             ),
             OperatorButton(
               action: () {
-                model.removeLastChar();
+                buttonProvider.removeLastChar();
               },
               text: numbers.numbers[1],
             ),
             OperatorButton(
               action: () {
-                model.checkInput(numbers.numbers[2]);
+                buttonProvider.checkInput(numbers.numbers[2]);
               },
               text: numbers.numbers[2],
             ),
             OperatorButton(
               action: () {
-                model.checkInput('/');
+                buttonProvider.checkInput('/');
               },
               text: numbers.numbers[3],
             ),
@@ -102,25 +127,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[4]);
+                buttonProvider.checkInput(numbers.numbers[4]);
               },
               text: numbers.numbers[4],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[5]);
+                buttonProvider.checkInput(numbers.numbers[5]);
               },
               text: numbers.numbers[5],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[6]);
+                buttonProvider.checkInput(numbers.numbers[6]);
               },
               text: numbers.numbers[6],
             ),
             OperatorButton(
               action: () {
-                model.checkInput('*');
+                buttonProvider.checkInput('*');
               },
               text: numbers.numbers[7],
             ),
@@ -136,25 +161,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[8]);
+                buttonProvider.checkInput(numbers.numbers[8]);
               },
               text: numbers.numbers[8],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[9]);
+                buttonProvider.checkInput(numbers.numbers[9]);
               },
               text: numbers.numbers[9],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[10]);
+                buttonProvider.checkInput(numbers.numbers[10]);
               },
               text: numbers.numbers[10],
             ),
             OperatorButton(
               action: () {
-                model.checkInput(numbers.numbers[11]);
+                buttonProvider.checkInput(numbers.numbers[11]);
               },
               text: numbers.numbers[11],
             ),
@@ -170,25 +195,25 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[12]);
+                buttonProvider.checkInput(numbers.numbers[12]);
               },
               text: numbers.numbers[12],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[13]);
+                buttonProvider.checkInput(numbers.numbers[13]);
               },
               text: numbers.numbers[13],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[14]);
+                buttonProvider.checkInput(numbers.numbers[14]);
               },
               text: numbers.numbers[14],
             ),
             OperatorButton(
               action: () {
-                model.checkInput(numbers.numbers[15]);
+                buttonProvider.checkInput(numbers.numbers[15]);
               },
               text: numbers.numbers[15],
             ),
@@ -196,12 +221,49 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
         ),
         Row(
           children: [
-            OperatorButton(
-              action: () {
-                toggleKeyboard();
-                widget.updateFlexCallback();
-              },
-              text: numbers.numbers[16],
+            Expanded(
+              child: Center(
+                child: ClipOval(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Theme.of(context)
+                          .colorScheme
+                          .tertiary
+                          .withOpacity(0.2),
+                      onTap: () {
+                        toggleKeyboard();
+                        widget.updateFlexCallback();
+                      },
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: AnimatedBuilder(
+                          animation: _animationController,
+                          builder: (context, child) {
+                            return Transform.rotate(
+                              angle: _animationController.value * 2.0 * pi,
+                              child: child,
+                            );
+                          },
+                          child: Icon(
+                            isExpanded
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_up,
+                            key: ValueKey(isExpanded),
+                            size: 30.0,
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             if (isExpanded) ...[
               DigitButton(
@@ -211,19 +273,19 @@ class _CalculatorKeypadState extends State<CalculatorKeypad> {
             ],
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[17]);
+                buttonProvider.checkInput(numbers.numbers[17]);
               },
               text: numbers.numbers[17],
             ),
             DigitButton(
               action: () {
-                model.checkInput(numbers.numbers[18]);
+                buttonProvider.checkInput(numbers.numbers[18]);
               },
               text: numbers.numbers[18],
             ),
             OperatorButton(
               action: () {
-                model.evaluateExpression();
+                buttonProvider.evaluateExpression();
               },
               color: Colors.deepOrangeAccent,
               text: numbers.numbers[19],

@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'dart:math';
 
 //TODO: Prioritising the order of operations
-class CalculatorModel extends ChangeNotifier {
+class CalculatorProvider extends ChangeNotifier {
   String _input = '0';
   String _commonResult = '0';
 

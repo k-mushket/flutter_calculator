@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/models/calculator_model.dart';
+import 'package:flutter_calculator/providers/calculator_input.dart';
 import 'package:provider/provider.dart';
 
 class HistoryScreen extends StatelessWidget {
@@ -7,7 +7,7 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<CalculatorModel>(context);
+    var model = Provider.of<CalculatorProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +32,7 @@ class HistoryScreen extends StatelessWidget {
         ],
         centerTitle: true,
       ),
-      body: Consumer<CalculatorModel>(
+      body: Consumer<CalculatorProvider>(
         builder: (context, model, child) {
           return Container(
             margin: const EdgeInsets.all(20),

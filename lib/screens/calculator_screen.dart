@@ -52,7 +52,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               endIndent: 20,
               thickness: 0.3,
             ),
-            const SizedBox(height: 10),
             Flexible(
               flex: flexKeypad,
               child: CalculatorKeypad(

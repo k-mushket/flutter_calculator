@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_calculator/models/calculator_model.dart';
+import 'package:flutter_calculator/providers/calculator_input.dart';
 
 class CalculatorDisplay extends StatefulWidget {
   const CalculatorDisplay({super.key});
@@ -11,11 +11,9 @@ class CalculatorDisplay extends StatefulWidget {
 }
 
 class _CalculatorDisplayState extends State<CalculatorDisplay> {
-
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<CalculatorModel>(
+    return Consumer<CalculatorProvider>(
       builder: (context, model, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.end,
