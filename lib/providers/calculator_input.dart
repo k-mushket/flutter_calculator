@@ -6,9 +6,10 @@ class CalculatorProvider extends ChangeNotifier {
   String _input = '0';
   String _commonResult = '0';
 
+  bool _resultShown = false;
   dynamic temp;
-  double? inputTextSize = 52;
-  double? previewResultTextSize = 26;
+  double inputTextSize = 52;
+  double previewResultTextSize = 30;
   final List<String> _historyStorage = [];
   List<num> numbers = [];
   List<String> operators = [];
@@ -23,11 +24,19 @@ class CalculatorProvider extends ChangeNotifier {
   String get previewResult => _commonResult;
 
   void _changeSize() {
+    inputTextSize = 30;
     previewResultTextSize = 52;
-    inputTextSize = 26;
+    notifyListeners();
   }
 
   void checkInput(String char) {
+    if (_resultShown) {
+      // Якщо результат вже показаний, додаємо попередній вираз до історії
+      _historyStorage.add('$_input\n=$_commonResult');
+      eraseExpression(); // Очищаємо вираз та результат для нового введення
+      _resultShown = false; // Скидаємо прапорець показу результату
+    }
+
     if (char == '%' && _input == '0' ||
         (_input.endsWith('.') && char == '.') ||
         (char == '.' &&
@@ -120,21 +129,32 @@ class CalculatorProvider extends ChangeNotifier {
   }
 
   void evaluateExpression() {
-    _historyStorage.add('$_input\n=$_commonResult');
+    _previewExpression(); // Переконайтеся, що цей метод коректно розраховує _commonResult
+
+    // Тепер не додаємо вираз до історії одразу
     _changeSize();
 
-    if (_historyStorage.isNotEmpty) {
-      eraseExpression();
-    }
+    // Замість додавання в історію, встановлюємо прапорець, що результат був показаний
+    _resultShown = true;
 
     notifyListeners();
+  }
+
+  void startNewExpression(String char) {
+    if (_input != '0' || _commonResult != '0') {
+      // Додаємо попередній вираз і його результат до історії
+      _historyStorage.add('$_input\n=$_commonResult');
+      eraseExpression(); // Очищуємо вираз та результат
+    }
+
+    checkInput(char); // Починаємо новий вираз із введеним символом
   }
 
   void eraseExpression() {
     _input = '0';
     _commonResult = '0';
     inputTextSize = 52;
-    previewResultTextSize = 26;
+    previewResultTextSize = 30;
     notifyListeners();
   }
 
@@ -146,7 +166,7 @@ class CalculatorProvider extends ChangeNotifier {
   void removeLastChar() {
     if (_input.length == 1) {
       inputTextSize = 52;
-      previewResultTextSize = 26;
+      previewResultTextSize = 30;
       _input = '0';
     } else if (_input.isNotEmpty) {
       _input = _input.substring(0, _input.length - 1);
